@@ -1,0 +1,27 @@
+{
+  "presets": [
+    "react",
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": ["last 2 versions", "IE >= 8"],
+          "node": "current"
+        }
+      }
+    ],
+    "stage-0"
+  ],
+  "plugins": [
+    "transform-runtime",
+    "add-module-exports",
+    "transform-decorators-legacy"
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "transform-react-jsx-source"
+      ]
+    }
+  }
+}
