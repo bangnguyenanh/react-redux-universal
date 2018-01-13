@@ -1,61 +1,40 @@
 @import '../../theme/variables.scss';
+@import '../../theme/mixins.scss';
 
-.home {
-  dd {
-    margin-bottom: 15px;
-  }
-}
-
+// Styling for the masthead
 .masthead {
-  background: #2d2d2d;
-  padding: 40px 20px;
-  color: white;
-  text-align: center;
-  .logo {
-    $size: 200px;
-    margin: auto;
-    height: $size;
-    width: $size;
-    border-radius: $size / 2;
-    border: 1px solid $cyan;
-    box-shadow: inset 0 0 10px $cyan;
-    vertical-align: middle;
-    p {
-      line-height: $size;
-      margin: 0px;
-    }
-    img {
-      width: 75%;
-      margin: auto;
-    }
+  padding-top: 10rem;
+  padding-bottom: calc(10rem - 56px);
+  background-image: url('./header.jpg');
+  background-position: center center;
+  @include background-cover;
+  hr {
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
   h1 {
-    color: $cyan;
-    font-size: 4em;
-  }
-  h2 {
-    color: #ddd;
-    font-size: 2em;
-    margin: 20px;
-  }
-  a {
-    color: #ddd;
+    font-size: 2rem;
   }
   p {
-    margin: 10px;
+    font-weight: 300;
   }
-  .humility {
-    color: $humility;
-    a {
-      color: $humility;
+  @media (min-width: 768px) {
+    p {
+      font-size: 1.15rem;
     }
   }
-  .github {
-    font-size: 1.5em;
+  @media (min-width: 992px) {
+    height: 100vh;
+    min-height: 650px;
+    padding-top: 0;
+    padding-bottom: 0;
+    h1 {
+      font-size: 3rem;
+    }
   }
-}
-
-.counterContainer {
-  text-align: center;
-  margin: 20px;
+  @media (min-width: 1200px) {
+    h1 {
+      font-size: 4rem;
+    }
+  }
 }

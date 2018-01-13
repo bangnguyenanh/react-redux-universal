@@ -5,6 +5,7 @@ import { CounterButton, GithubButton } from 'components';
 import config from 'config';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
+import { PortfolioBox, ServiceBox } from 'components';
 
 @connect(state => ({
   online: state.online
@@ -17,7 +18,7 @@ export default class Home extends Component {
   render() {
     const { online } = this.props;
 
-    const styles = require('./styles/creative.scss');
+    const styles = require('./Home.scss');
     const imgThumb1 = require('./img/portfolio/thumbnails/1.jpg');
     const imgThumb2 = require('./img/portfolio/thumbnails/2.jpg');
     const imgThumb3 = require('./img/portfolio/thumbnails/3.jpg');
@@ -52,7 +53,7 @@ export default class Home extends Component {
         <section className="bg-primary" id="about">
           <div className="container">
             <div className="row">
-              <div className="col-lg-8 mx-auto text-center">
+              <div className="col-lg-12 mx-auto text-center">
                 <h2 className="section-heading text-white">We've got what you need!</h2>
                 <hr className="light my-4" />
                 <p className="text-faded mb-4">
@@ -80,32 +81,28 @@ export default class Home extends Component {
           <div className="container">
             <div className="row">
               <div className="col-lg-3 col-md-6 text-center">
-                <div className="service-box mt-5 mx-auto">
-                  <i className="fa fa-4x fa-diamond text-primary mb-3 sr-icons" />
-                  <h3 className="mb-3">Sturdy Templates</h3>
-                  <p className="text-muted mb-0">Our templates are updated regularly so they don't break.</p>
-                </div>
+                <ServiceBox
+                  title="Sturdy Templates"
+                  description="Our templates are updated regularly so they don't break."
+                  icon="fa-diamond" />
               </div>
               <div className="col-lg-3 col-md-6 text-center">
-                <div className="service-box mt-5 mx-auto">
-                  <i className="fa fa-4x fa-paper-plane text-primary mb-3 sr-icons" />
-                  <h3 className="mb-3">Ready to Ship</h3>
-                  <p className="text-muted mb-0">You can use this theme as is, or you can make changes!</p>
-                </div>
+                <ServiceBox
+                  title="Ready to Ship"
+                  description="You can use this theme as is, or you can make changes!"
+                  icon="fa-paper-plane" />
               </div>
               <div className="col-lg-3 col-md-6 text-center">
-                <div className="service-box mt-5 mx-auto">
-                  <i className="fa fa-4x fa-newspaper-o text-primary mb-3 sr-icons" />
-                  <h3 className="mb-3">Up to Date</h3>
-                  <p className="text-muted mb-0">We update dependencies to keep things fresh.</p>
-                </div>
+                <ServiceBox
+                  title="Up to Date"
+                  description="We update dependencies to keep things fresh."
+                  icon="fa-newspaper-o" />
               </div>
               <div className="col-lg-3 col-md-6 text-center">
-                <div className="service-box mt-5 mx-auto">
-                  <i className="fa fa-4x fa-heart text-primary mb-3 sr-icons" />
-                  <h3 className="mb-3">Made with Love</h3>
-                  <p className="text-muted mb-0">You have to make your websites with love these days!</p>
-                </div>
+                <ServiceBox
+                  title="Made with Love"
+                  description="You have to make your websites with love these days!"
+                  icon="fa-heart" />
               </div>
             </div>
           </div>
@@ -115,70 +112,22 @@ export default class Home extends Component {
           <div className="container-fluid p-0">
             <div className="row no-gutters popup-gallery">
               <div className="col-lg-4 col-sm-6">
-                <a className="portfolio-box" href="#">
-                  <img className="img-fluid" src={imgThumb1} alt="" />
-                  <div className="portfolio-box-caption">
-                    <div className="portfolio-box-caption-content">
-                      <div className="project-category text-faded">Category</div>
-                      <div className="project-name">Project Name</div>
-                    </div>
-                  </div>
-                </a>
+                <PortfolioBox link="xxx" projectCategory="Category" projectName="Project Name" thumbnailUrl={imgThumb1} />
               </div>
               <div className="col-lg-4 col-sm-6">
-                <a className="portfolio-box" href="img/portfolio/fullsize/2.jpg">
-                  <img className="img-fluid" src={imgThumb2} alt="" />
-                  <div className="portfolio-box-caption">
-                    <div className="portfolio-box-caption-content">
-                      <div className="project-category text-faded">Category</div>
-                      <div className="project-name">Project Name</div>
-                    </div>
-                  </div>
-                </a>
+                <PortfolioBox link="xxx" projectCategory="Category" projectName="Project Name" thumbnailUrl={imgThumb2} />
               </div>
               <div className="col-lg-4 col-sm-6">
-                <a className="portfolio-box" href="img/portfolio/fullsize/3.jpg">
-                  <img className="img-fluid" src={imgThumb3} alt="" />
-                  <div className="portfolio-box-caption">
-                    <div className="portfolio-box-caption-content">
-                      <div className="project-category text-faded">Category</div>
-                      <div className="project-name">Project Name</div>
-                    </div>
-                  </div>
-                </a>
+                <PortfolioBox link="xxx" projectCategory="Category" projectName="Project Name" thumbnailUrl={imgThumb3} />
               </div>
               <div className="col-lg-4 col-sm-6">
-                <a className="portfolio-box" href="img/portfolio/fullsize/4.jpg">
-                  <img className="img-fluid" src={imgThumb4} alt="" />
-                  <div className="portfolio-box-caption">
-                    <div className="portfolio-box-caption-content">
-                      <div className="project-category text-faded">Category</div>
-                      <div className="project-name">Project Name</div>
-                    </div>
-                  </div>
-                </a>
+                <PortfolioBox link="xxx" projectCategory="Category" projectName="Project Name" thumbnailUrl={imgThumb4} />
               </div>
               <div className="col-lg-4 col-sm-6">
-                <a className="portfolio-box" href="img/portfolio/fullsize/5.jpg">
-                  <img className="img-fluid" src={imgThumb5} alt="" />
-                  <div className="portfolio-box-caption">
-                    <div className="portfolio-box-caption-content">
-                      <div className="project-category text-faded">Category</div>
-                      <div className="project-name">Project Name</div>
-                    </div>
-                  </div>
-                </a>
+                <PortfolioBox link="xxx" projectCategory="Category" projectName="Project Name" thumbnailUrl={imgThumb5} />
               </div>
               <div className="col-lg-4 col-sm-6">
-                <a className="portfolio-box" href="img/portfolio/fullsize/6.jpg">
-                  <img className="img-fluid" src={imgThumb6} alt="" />
-                  <div className="portfolio-box-caption">
-                    <div className="portfolio-box-caption-content">
-                      <div className="project-category text-faded">Category</div>
-                      <div className="project-name">Project Name</div>
-                    </div>
-                  </div>
-                </a>
+                <PortfolioBox link="xxx" projectCategory="Category" projectName="Project Name" thumbnailUrl={imgThumb6} />
               </div>
             </div>
           </div>
@@ -196,7 +145,7 @@ export default class Home extends Component {
         <section id="contact">
           <div className="container">
             <div className="row">
-              <div className="col-lg-8 mx-auto text-center">
+              <div className="col-lg-12 mx-auto text-center">
                 <h2 className="section-heading">Let's Get In Touch!</h2>
                 <hr className="my-4" />
                 <p className="mb-5">
@@ -206,11 +155,11 @@ export default class Home extends Component {
               </div>
             </div>
             <div className="row">
-              <div className="col-lg-4 ml-auto text-center">
+              <div className="col-lg-6 ml-auto text-center">
                 <i className="fa fa-phone fa-3x mb-3 sr-contact" />
                 <p>123-456-6789</p>
               </div>
-              <div className="col-lg-4 mr-auto text-center">
+              <div className="col-lg-6 mr-auto text-center">
                 <i className="fa fa-envelope-o fa-3x mb-3 sr-contact" />
                 <p>
                   <a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a>

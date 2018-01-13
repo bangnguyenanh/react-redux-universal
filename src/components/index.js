@@ -13,6 +13,8 @@ export InfoBar from './InfoBar/InfoBar';
 // export MiniInfoBar from './MiniInfoBar/MiniInfoBar';
 export Notifs from './Notifs/Notifs';
 export Provider from './Provider/Provider';
+export PortfolioBox from './PortfolioBox/PortfolioBox';
+export ServiceBox from './ServiceBox/ServiceBox';
 // export RegisterForm from './RegisterForm/RegisterForm';
 // export SurveyForm from './SurveyForm/SurveyForm';
 // export WidgetForm from './WidgetForm/WidgetForm';
