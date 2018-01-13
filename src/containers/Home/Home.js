@@ -16,265 +16,209 @@ export default class Home extends Component {
 
   render() {
     const { online } = this.props;
-    const styles = require('./Home.scss');
-    // require the logo image both from client and server
-    const logoImage = require('./logo.png');
+
+    const styles = require('./styles/creative.scss');
+    const imgThumb1 = require('./img/portfolio/thumbnails/1.jpg');
+    const imgThumb2 = require('./img/portfolio/thumbnails/2.jpg');
+    const imgThumb3 = require('./img/portfolio/thumbnails/3.jpg');
+    const imgThumb4 = require('./img/portfolio/thumbnails/4.jpg');
+    const imgThumb5 = require('./img/portfolio/thumbnails/5.jpg');
+    const imgThumb6 = require('./img/portfolio/thumbnails/6.jpg');
+
     return (
-      <div className={styles.home}>
-        <Helmet title="Home" />
-        <div className={styles.masthead}>
-          <div className="container">
-            <div className={styles.logo}>
-              <p>
-                <img src={logoImage} alt="presentation" />
-              </p>
+      <div className="hello">
+        <header className={styles.masthead}>
+          <div className="container my-auto">
+            <div className="row">
+              <div className="col-lg-10 mx-auto">
+                <h1 className="text-uppercase">
+                  <strong>Your Favorite Source of Free Bootstrap Themes</strong>
+                </h1>
+                <hr />
+              </div>
+              <div className="col-lg-8 mx-auto">
+                <p className="text-faded mb-5">
+                  Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download
+                  your template and start going, no strings attached!
+                </p>
+                <a className="btn btn-primary btn-xl js-scroll-trigger" href="#about">
+                  Find Out More
+                </a>
+              </div>
             </div>
-            <h1>{config.app.title}</h1>
-
-            <h2>{config.app.description}</h2>
-
-            <p>
-              <a
-                className={styles.github}
-                href="https://github.com/erikras/react-redux-universal-hot-example"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fa fa-github" /> View on Github
-              </a>
-            </p>
-            {online && (
-              <GithubButton
-                user="erikras"
-                repo="react-redux-universal-hot-example"
-                type="star"
-                width={160}
-                height={30}
-                count
-                large
-              />
-            )}
-            {online && (
-              <GithubButton
-                user="erikras"
-                repo="react-redux-universal-hot-example"
-                type="fork"
-                width={160}
-                height={30}
-                count
-                large
-              />
-            )}
-
-            <p className={styles.humility}>
-              Created and maintained by{' '}
-              <a href="https://twitter.com/erikras" target="_blank" rel="noopener noreferrer">
-                @erikras
-              </a>.
-            </p>
           </div>
-        </div>
+        </header>
 
-        <div className="container">
-          <div className={styles.counterContainer}>
-            <CounterButton multireducerKey="counter1" />
-            <CounterButton multireducerKey="counter2" />
-            <CounterButton multireducerKey="counter3" />
+        <section className="bg-primary" id="about">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-8 mx-auto text-center">
+                <h2 className="section-heading text-white">We've got what you need!</h2>
+                <hr className="light my-4" />
+                <p className="text-faded mb-4">
+                  Start Bootstrap has everything you need to get your new website up and running in no time! All of the
+                  templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings
+                  attached!
+                </p>
+                <a className="btn btn-light btn-xl js-scroll-trigger" href="#services">
+                  Get Started!
+                </a>
+              </div>
+            </div>
           </div>
+        </section>
 
-          <p>This starter boilerplate app uses the following technologies:</p>
+        <section id="services">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-12 text-center">
+                <h2 className="section-heading">At Your Service</h2>
+                <hr className="my-4" />
+              </div>
+            </div>
+          </div>
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-3 col-md-6 text-center">
+                <div className="service-box mt-5 mx-auto">
+                  <i className="fa fa-4x fa-diamond text-primary mb-3 sr-icons" />
+                  <h3 className="mb-3">Sturdy Templates</h3>
+                  <p className="text-muted mb-0">Our templates are updated regularly so they don't break.</p>
+                </div>
+              </div>
+              <div className="col-lg-3 col-md-6 text-center">
+                <div className="service-box mt-5 mx-auto">
+                  <i className="fa fa-4x fa-paper-plane text-primary mb-3 sr-icons" />
+                  <h3 className="mb-3">Ready to Ship</h3>
+                  <p className="text-muted mb-0">You can use this theme as is, or you can make changes!</p>
+                </div>
+              </div>
+              <div className="col-lg-3 col-md-6 text-center">
+                <div className="service-box mt-5 mx-auto">
+                  <i className="fa fa-4x fa-newspaper-o text-primary mb-3 sr-icons" />
+                  <h3 className="mb-3">Up to Date</h3>
+                  <p className="text-muted mb-0">We update dependencies to keep things fresh.</p>
+                </div>
+              </div>
+              <div className="col-lg-3 col-md-6 text-center">
+                <div className="service-box mt-5 mx-auto">
+                  <i className="fa fa-4x fa-heart text-primary mb-3 sr-icons" />
+                  <h3 className="mb-3">Made with Love</h3>
+                  <p className="text-muted mb-0">You have to make your websites with love these days!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-          <ul>
-            <li>
-              <del>Isomorphic</del>{' '}
-              <a href="https://medium.com/@mjackson/universal-javascript-4761051b7ae9">Universal</a> rendering
-            </li>
-            <li>Both client and server make calls to load data from separate API server</li>
-            <li>
-              <a href="https://github.com/facebook/react" target="_blank" rel="noopener noreferrer">
-                React
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/rackt/react-router" target="_blank" rel="noopener noreferrer">
-                React Router
-              </a>
-            </li>
-            <li>
-              <a href="http://expressjs.com" target="_blank" rel="noopener noreferrer">
-                Express
-              </a>
-            </li>
-            <li>
-              <a href="http://babeljs.io" target="_blank" rel="noopener noreferrer">
-                Babel
-              </a>{' '}
-              for ES6 and ES7 magic
-            </li>
-            <li>
-              <a href="http://webpack.github.io" target="_blank" rel="noopener noreferrer">
-                Webpack
-              </a>{' '}
-              for bundling
-            </li>
-            <li>
-              <a
-                href="http://webpack.github.io/docs/webpack-dev-middleware.html"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Webpack Dev Middleware
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/glenjamin/webpack-hot-middleware" target="_blank" rel="noopener noreferrer">
-                Webpack Hot Middleware
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/rackt/redux" target="_blank" rel="noopener noreferrer">
-                Redux
-              </a>
-              's futuristic{' '}
-              <a
-                href="https://facebook.github.io/react/blog/2014/05/06/flux.html"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Flux
-              </a>{' '}
-              implementation
-            </li>
-            <li>
-              <a href="https://github.com/gaearon/redux-devtools" target="_blank" rel="noopener noreferrer">
-                Redux Dev Tools
-              </a>{' '}
-              for next generation DX (developer experience). Watch{' '}
-              <a href="https://www.youtube.com/watch?v=xsSnOQynTHs" target="_blank" rel="noopener noreferrer">
-                Dan Abramov's talk
-              </a>.
-            </li>
-            <li>
-              <a href="https://github.com/rackt/redux-router" target="_blank" rel="noopener noreferrer">
-                Redux Router
-              </a>{' '}
-              Keep your router state in your Redux store
-            </li>
-            <li>
-              <a href="http://eslint.org" target="_blank" rel="noopener noreferrer">
-                ESLint
-              </a>{' '}
-              to maintain a consistent code style
-            </li>
-            <li>
-              <a href="https://github.com/erikras/redux-form" target="_blank" rel="noopener noreferrer">
-                redux-form
-              </a>{' '}
-              to manage form state in Redux
-            </li>
-            <li>
-              <a href="https://github.com/erikras/multireducer" target="_blank" rel="noopener noreferrer">
-                multireducer
-              </a>{' '}
-              combine several identical reducer states into one key-based reducer
-            </li>
-            <li>
-              <a href="https://github.com/webpack/style-loader" target="_blank" rel="noopener noreferrer">
-                style-loader
-              </a>{' '}
-              and{' '}
-              <a href="https://github.com/jtangelder/sass-loader" target="_blank" rel="noopener noreferrer">
-                sass-loader
-              </a>{' '}
-              to allow import of stylesheets
-            </li>
-            <li>
-              <a href="https://github.com/shakacode/bootstrap-sass-loader" target="_blank" rel="noopener noreferrer">
-                bootstrap-sass-loader
-              </a>{' '}
-              to customize Bootstrap
-            </li>
-            <li>
-              <a href="https://github.com/FortAwesome/Font-Awesome" target="_blank" rel="noopener noreferrer">
-                font-awesome
-              </a>
-            </li>
-            <li>
-              <a href="http://socket.io/">socket.io</a> for real-time communication
-            </li>
-          </ul>
+        <section className="p-0" id="portfolio">
+          <div className="container-fluid p-0">
+            <div className="row no-gutters popup-gallery">
+              <div className="col-lg-4 col-sm-6">
+                <a className="portfolio-box" href="#">
+                  <img className="img-fluid" src={imgThumb1} alt="" />
+                  <div className="portfolio-box-caption">
+                    <div className="portfolio-box-caption-content">
+                      <div className="project-category text-faded">Category</div>
+                      <div className="project-name">Project Name</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div className="col-lg-4 col-sm-6">
+                <a className="portfolio-box" href="img/portfolio/fullsize/2.jpg">
+                  <img className="img-fluid" src={imgThumb2} alt="" />
+                  <div className="portfolio-box-caption">
+                    <div className="portfolio-box-caption-content">
+                      <div className="project-category text-faded">Category</div>
+                      <div className="project-name">Project Name</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div className="col-lg-4 col-sm-6">
+                <a className="portfolio-box" href="img/portfolio/fullsize/3.jpg">
+                  <img className="img-fluid" src={imgThumb3} alt="" />
+                  <div className="portfolio-box-caption">
+                    <div className="portfolio-box-caption-content">
+                      <div className="project-category text-faded">Category</div>
+                      <div className="project-name">Project Name</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div className="col-lg-4 col-sm-6">
+                <a className="portfolio-box" href="img/portfolio/fullsize/4.jpg">
+                  <img className="img-fluid" src={imgThumb4} alt="" />
+                  <div className="portfolio-box-caption">
+                    <div className="portfolio-box-caption-content">
+                      <div className="project-category text-faded">Category</div>
+                      <div className="project-name">Project Name</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div className="col-lg-4 col-sm-6">
+                <a className="portfolio-box" href="img/portfolio/fullsize/5.jpg">
+                  <img className="img-fluid" src={imgThumb5} alt="" />
+                  <div className="portfolio-box-caption">
+                    <div className="portfolio-box-caption-content">
+                      <div className="project-category text-faded">Category</div>
+                      <div className="project-name">Project Name</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div className="col-lg-4 col-sm-6">
+                <a className="portfolio-box" href="img/portfolio/fullsize/6.jpg">
+                  <img className="img-fluid" src={imgThumb6} alt="" />
+                  <div className="portfolio-box-caption">
+                    <div className="portfolio-box-caption-content">
+                      <div className="project-category text-faded">Category</div>
+                      <div className="project-name">Project Name</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
 
-          <h3>Features demonstrated in this project</h3>
+        <section className="bg-dark text-white">
+          <div className="container text-center">
+            <h2 className="mb-4">Free Download at Start Bootstrap!</h2>
+            <a className="btn btn-light btn-xl sr-button" href="http://startbootstrap.com/template-overviews/creative/">
+              Download Now!
+            </a>
+          </div>
+        </section>
 
-          <dl>
-            <dt>Multiple components subscribing to same redux store slice</dt>
-            <dd>
-              The <code>App.js</code> that wraps all the pages contains an <code>InfoBar</code> component that fetches
-              data from the server initially, but allows for the user to refresh the data from the client.{' '}
-              <code>About.js</code> contains a <code>MiniInfoBar</code> that displays the same data.
-            </dd>
-            <dt>Server-side data loading</dt>
-            <dd>
-              The <Link to="/widgets">Widgets page</Link> demonstrates how to fetch data asynchronously from some source
-              that is needed to complete the server-side rendering. <code>Widgets.js</code>'s
-              <code>asyncConnect()</code> function is called before the widgets page is loaded, on either the server or
-              the client, allowing all the widget data to be loaded and ready for the page to render.
-            </dd>
-            <dt>Data loading errors</dt>
-            <dd>
-              The <Link to="/widgets">Widgets page</Link> also demonstrates how to deal with data loading errors in
-              Redux. The API endpoint that delivers the widget data intentionally fails 33% of the time to highlight
-              this. The <code>clientMiddleware</code> sends an error action which the <code>widgets</code> reducer picks
-              up and saves to the Redux state for presenting to the user.
-            </dd>
-            <dt>Session based login</dt>
-            <dd>
-              On the <Link to="/login">Login page</Link> you can submit a username which will be sent to the server and
-              stored in the session. Subsequent refreshes will show that you are still logged in.
-            </dd>
-            <dt>Redirect after state change</dt>
-            <dd>
-              After you log in, you will be redirected to a Login Success page. This <strike>magic</strike> logic is
-              performed in <code>componentWillReceiveProps()</code> in <code>App.js</code>, but it could be done in any
-              component that listens to the appropriate store slice, via Redux's <code>@connect</code>, and pulls the
-              router from the context.
-            </dd>
-            <dt>Auth-required views</dt>
-            <dd>
-              The aforementioned Login Success page is only visible to you if you are logged in. If you try to{' '}
-              <Link to="/loginSuccess">go there</Link> when you are not logged in, you will be forwarded back to this
-              home page. This <strike>magic</strike> logic is performed by the
-              <code>onEnter</code> hook within <code>routes.js</code>.
-            </dd>
-            <dt>Forms</dt>
-            <dd>
-              The <Link to="/survey">Survey page</Link> uses the still-experimental{' '}
-              <a href="https://github.com/erikras/redux-form" target="_blank" rel="noopener noreferrer">
-                redux-form
-              </a>{' '}
-              to manage form state inside the Redux store. This includes immediate client-side validation.
-            </dd>
-            <dt>WebSockets / socket.io</dt>
-            <dd>
-              The <Link to="/chat">Chat</Link> uses the socket.io technology for real-time communication between
-              clients.
-            </dd>
-          </dl>
-
-          <h3>From the author</h3>
-
-          <p>
-            I cobbled this together from a wide variety of similar "starter" repositories. As I post this in June 2015,
-            all of these libraries are right at the bleeding edge of web development. They may fall out of fashion as
-            quickly as they have come into it, but I personally believe that this stack is the future of web development
-            and will survive for several years. I'm building my new projects like this, and I recommend that you do,
-            too.
-          </p>
-
-          <p>Thanks for taking the time to check this out.</p>
-
-          <p>– Erik Rasmussen</p>
-        </div>
+        <section id="contact">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-8 mx-auto text-center">
+                <h2 className="section-heading">Let's Get In Touch!</h2>
+                <hr className="my-4" />
+                <p className="mb-5">
+                  Ready to start your next project with us? That's great! Give us a call or send us an email and we will
+                  get back to you as soon as possible!
+                </p>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-lg-4 ml-auto text-center">
+                <i className="fa fa-phone fa-3x mb-3 sr-contact" />
+                <p>123-456-6789</p>
+              </div>
+              <div className="col-lg-4 mr-auto text-center">
+                <i className="fa fa-envelope-o fa-3x mb-3 sr-contact" />
+                <p>
+                  <a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     );
   }

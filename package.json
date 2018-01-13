@@ -33,7 +33,6 @@
     "watch-client": "bnr watch-client",
     "build": "bnr build",
     "postinstall": "concurrently \"npm run build\"",
-    "precommit": "lint-staged",
     "prettier": "prettier-eslint --write --eslint-config-path .eslintrc './+(src|api)/**/*.js'",
     "lint": "eslint -c .eslintrc api src",
     "test": "bnr test",

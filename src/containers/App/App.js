@@ -30,13 +30,13 @@ import config from 'config';
     }
   }
 ])
-
-@connect(state => ({
-  notifs: state.notifs, user: state.auth.user
-}),
+@connect(
+  state => ({
+    notifs: state.notifs,
+    user: state.auth.user
+  }),
   { logout, pushState: push }
 )
-
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.element.isRequired,
@@ -164,8 +164,6 @@ export default class App extends Component {
 
           {children}
         </div>
-
-        <InfoBar />
 
         <div className="well text-center">
           Have questions? Ask for help{' '}
