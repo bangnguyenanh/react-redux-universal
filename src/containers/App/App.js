@@ -165,7 +165,7 @@ export default class App extends Component {
           {children}
         </div>
 
-        <div className="well text-center">
+        <div className={`${styles.footer} well text-center`}>
           Have questions? Ask for help{' '}
           <a
             href="https://github.com/erikras/react-redux-universal-hot-example/issues"

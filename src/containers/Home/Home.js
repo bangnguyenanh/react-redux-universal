@@ -27,17 +27,17 @@ export default class Home extends Component {
     const imgThumb6 = require('./img/portfolio/thumbnails/6.jpg');
 
     return (
-      <div className="hello">
-        <header className={styles.masthead}>
+      <div>
+        <header className={`${styles.masthead} text-center text-white d-flex`}>
           <div className="container my-auto">
             <div className="row">
-              <div className="col-lg-10 mx-auto">
+              <div className="col-lg-12 mx-auto">
                 <h1 className="text-uppercase">
                   <strong>Your Favorite Source of Free Bootstrap Themes</strong>
                 </h1>
                 <hr />
               </div>
-              <div className="col-lg-8 mx-auto">
+              <div className="col-lg-12 mx-auto">
                 <p className="text-faded mb-5">
                   Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download
                   your template and start going, no strings attached!

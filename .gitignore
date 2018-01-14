@@ -11,3 +11,4 @@ webpack/dlls/*.json
 api/**/*.nedb
 *.report.html
 coverage
+*.DS_Store
