@@ -155,11 +155,9 @@ export function load() {
 export function register(data) {
   return {
     types: [REGISTER, REGISTER_SUCCESS, REGISTER_FAIL],
-    promise: ({ app }) =>
-      app
-        .service('users')
-        .create(data)
-        .catch(catchValidation)
+    promise: ({ client }) => {
+      client.post("/auth/register", {...data, fullName: "bangnguyen"});
+    }
   };
 }
 
@@ -167,13 +165,9 @@ export function login(strategy, data) {
   const socketId = socket.io.engine.id;
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-    promise: async ({ client, restApp, app }) => {
+    promise: async ({ client }) => {
       try {
-        const response = await restApp.authenticate({
-          ...data,
-          strategy,
-          socketId
-        });
+        client.post("/auth/login", {...data, source: "webapp"});
         await setCookie({ app })(response);
         setToken({ client, app, restApp })(response);
         setUser({ app, restApp })(response);
