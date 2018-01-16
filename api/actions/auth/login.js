@@ -5,13 +5,20 @@ import { sessionExpiredTime } from '../../common/config';
 export default function login(req) {
     return new Promise((resolve, reject) => {
         User.findOne({ email: req.body.email }, (err, user) => {
+            if (err) {
+                reject({ message: 'Something went wrong!' });
+                return;
+            }
+
             if (!user) {
                 reject({ message: 'Not found!' });
+                return;
             }
 
             user.comparePassword(req.body.password, (err, isMatch) => {
                 if (!isMatch) {
                     reject({ message: 'Wrong email and/or password' });
+                    return;
                 }
 
                 const accessToken = createToken(user);

@@ -108,28 +108,6 @@ const catchValidation = error => {
   return Promise.reject(error);
 };
 
-function setCookie({ app }) {
-  return async response => {
-    const payload = await app.passport.verifyJWT(response.accessToken);
-    const options = payload.exp ? { expires: new Date(payload.exp * 1000) } : undefined;
-
-    cookie.set('feathers-jwt', response.accessToken, options);
-  };
-}
-
-function setToken({ client }) {
-  return response => {
-    const { accessToken } = response;
-    client.setJwtToken(accessToken);
-  };
-}
-
-function setUser({ app, restApp }) {
-  return response => {
-    app.set('user', response.user);
-    restApp.set('user', response.user);
-  };
-}
 
 /*
 * Actions
@@ -142,12 +120,9 @@ export function isLoaded(globalState) {
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: async ({ app, restApp, client }) => {
-      const response = await restApp.authenticate();
-      await setCookie({ app })(response);
-      setToken({ client, app, restApp })(response);
-      setUser({ app, restApp })(response);
-      return response;
+    promise: async ({ client }) => {
+      const result = await client.post("/auth/load");
+      return result;
     }
   };
 }
@@ -155,23 +130,20 @@ export function load() {
 export function register(data) {
   return {
     types: [REGISTER, REGISTER_SUCCESS, REGISTER_FAIL],
-    promise: ({ client }) => {
-      client.post("/auth/register", {...data, fullName: "bangnguyen"});
+    promise: async ({ client }) => {
+      const result = client.post("/auth/register", { ...data, fullName: "bangnguyen" });
+      return result;
     }
   };
 }
 
 export function login(strategy, data) {
-  const socketId = socket.io.engine.id;
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: async ({ client }) => {
       try {
-        client.post("/auth/login", {...data, source: "webapp"});
-        await setCookie({ app })(response);
-        setToken({ client, app, restApp })(response);
-        setUser({ app, restApp })(response);
-        return response;
+        const result = await client.post("/auth/login", { ...data, source: "webapp" });
+        return result;
       } catch (error) {
         if (strategy === 'local') {
           return catchValidation(error);
@@ -185,9 +157,8 @@ export function login(strategy, data) {
 export function logout() {
   return {
     types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
-    promise: async ({ client, app, restApp }) => {
-      await app.logout();
-      setToken({ client, app, restApp })({ accessToken: null });
+    promise: async ({ client }) => {
+      //TODO: need to be implemented
     }
   };
 }

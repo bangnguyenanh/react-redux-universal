@@ -30,25 +30,17 @@ import config from 'config';
     }
   }
 ])
+
 @connect(
-  state => ({
-    notifs: state.notifs,
-    user: state.auth.user
-  }),
-  { logout, pushState: push }
+  state => ({ notifs: state.notifs, user: state.auth.user }), { logout, pushState: push }
 )
+
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.element.isRequired,
-    router: PropTypes.shape({
-      location: PropTypes.object
-    }).isRequired,
-    user: PropTypes.shape({
-      email: PropTypes.string
-    }),
-    notifs: PropTypes.shape({
-      global: PropTypes.array
-    }).isRequired,
+    router: PropTypes.shape({ location: PropTypes.object }).isRequired,
+    user: PropTypes.shape({ email: PropTypes.string }),
+    notifs: PropTypes.shape({ global: PropTypes.array }).isRequired,
     logout: PropTypes.func.isRequired,
     pushState: PropTypes.func.isRequired
   };
