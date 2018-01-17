@@ -24,20 +24,18 @@ export default function login(req) {
                 const accessToken = createToken(user);
 
                 if (req.body.source === 'CHROME_EXTENSION') {
-                    resolve(res => {
-                        res.json({
-                            accessToken: accessToken,
-                            fullName: user.fullName,
-                            email: user.email
-                        });
+                    resolve({
+                        accessToken: accessToken,
+                        fullName: user.fullName,
+                        email: user.email
                     });
                 } else if (req.body.source === 'webapp') {
-                    resolve(res => {
-                        res.cookie('access_token', accessToken, { maxAge: sessionExpiredTime });
-                        res.json({
+                    resolve({
+                        user: {
                             fullName: user.fullName,
                             email: user.email
-                        });
+                        },
+                        accessToken: accessToken
                     });
                 } else {
                     reject({ message: 'undefined source' });

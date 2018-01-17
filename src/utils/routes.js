@@ -1,15 +1,15 @@
 import async from 'async';
 import isPromise from 'is-promise';
-import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
+import { isAuthLoaded, loadAuth } from 'redux/modules/auth';
 
 export default function getRoutesUtils(store) {
 
   async function injectReducerAndRender(reducerPromises, containerPromise) {
     const reducerNames = Object.keys(reducerPromises);
     const reducers = await Promise.all(Object.values(reducerPromises));
-    
+
     reducers.map((reducer, i) => store.inject(reducerNames[i], reducer.default || reducer));
-    
+
     if (!isPromise(containerPromise) && typeof containerPromise === 'object') {
       const containerNames = Object.keys(containerPromise);
       const containers = await Promise.all(Object.values(containerPromise));
@@ -55,7 +55,7 @@ export default function getRoutesUtils(store) {
 
   function loadAuthIfNeeded() {
     if (!isAuthLoaded(store.getState())) {
-      return store.dispatch(loadAuth()).catch(() => {});
+      return store.dispatch(loadAuth()).catch(() => { });
     }
     return Promise.resolve();
   }

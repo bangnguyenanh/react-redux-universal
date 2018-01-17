@@ -1,6 +1,6 @@
 import { socket } from 'app';
 import { SubmissionError } from 'redux-form';
-import cookie from 'js-cookie';
+import jsCookie from 'js-cookie';
 
 const LOAD = 'redux-example/auth/LOAD';
 const LOAD_SUCCESS = 'redux-example/auth/LOAD_SUCCESS';
@@ -78,27 +78,15 @@ export default function reducer(state = initialState, action = {}) {
     case LOGOUT:
       return {
         ...state,
-        loggingOut: true
-      };
-    case LOGOUT_SUCCESS:
-      return {
-        ...state,
-        loggingOut: false,
         accessToken: null,
         user: null
-      };
-    case LOGOUT_FAIL:
-      return {
-        ...state,
-        loggingOut: false,
-        logoutError: action.error
       };
     default:
       return state;
   }
 }
 
-const catchValidation = error => {
+const catchValidation = (error) => {
   if (error.message) {
     if (error.message === 'Validation failed' && error.data) {
       throw new SubmissionError(error.data);
@@ -108,16 +96,15 @@ const catchValidation = error => {
   return Promise.reject(error);
 };
 
-
 /*
 * Actions
-* * * * */
+*/
 
-export function isLoaded(globalState) {
-  return globalState.auth && globalState.auth.loaded;
+export function isAuthLoaded(state) {
+  return state.auth && state.auth.loaded;
 }
 
-export function load() {
+export function loadAuth() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: async ({ client }) => {
@@ -137,28 +124,24 @@ export function register(data) {
   };
 }
 
-export function login(strategy, data) {
+export function login(data) {
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: async ({ client }) => {
       try {
         const result = await client.post("/auth/login", { ...data, source: "webapp" });
+        jsCookie.set("accessToken", result.accessToken);
         return result;
       } catch (error) {
-        if (strategy === 'local') {
-          return catchValidation(error);
-        }
-        throw error;
+        return catchValidation(error);
       }
     }
   };
 }
 
 export function logout() {
+  jsCookie.remove("accessToken");
   return {
-    types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
-    promise: async ({ client }) => {
-      //TODO: need to be implemented
-    }
+    type: LOGOUT
   };
 }

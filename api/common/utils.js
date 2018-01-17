@@ -31,7 +31,6 @@ export function mapUrl(availableActions = {}, url = []) {
 export function createToken(user) {
   let payload = {
     sub: {
-      id: user._id,
       email: user.email,
       fullName: user.fullName
     },

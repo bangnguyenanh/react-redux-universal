@@ -1,23 +1,44 @@
+import { User } from 'models';
 import { parseToken } from '../../common/utils';
 
 export default function load(req) {
   return new Promise((resolve, reject) => {
-    if (req.cookies && req.cookies.access_token) {
+    if (req.cookies && req.cookies.accessToken) {
       let payload = {};
       try {
-        payload = parseToken(req.cookies.access_token);
+        payload = parseToken(req.cookies.accessToken);
       } catch (e) {
-        res.clearCookie("access_token");
+        res.clearCookie("accessToken");
         reject("Cookie is not valid");
       }
+
       if (Math.round(new Date().getTime() / 1000) < payload.exp) {
-        resolve(payload.sub);
+        User.findOne({ email: payload.sub.email }, (err, user) => {
+          if (err) {
+            reject({ message: 'Something went wrong' });
+            return;
+          }
+
+          if (!user) {
+            reject({ message: 'User not found!' });
+            return;
+          }
+
+          resolve({
+            accessToken: req.cookies.accessToken,
+            user: {
+              fullName: user.fullName,
+              email: user.email
+            }
+          });
+        })
+
       } else {
-        res.clearCookie("access_token");
+        res.clearCookie("accessToken");
         reject("Cookie expired!");
       }
     } else {
-      resolve(null);
+      reject({ loadAuth: true });
     }
   })
 }

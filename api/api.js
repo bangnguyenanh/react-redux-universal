@@ -37,7 +37,7 @@ mongoose.connect('mongodb://localhost/socialapp');
 app.use((req, res) => {
   const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
 
-  const {action, params} = mapUrl(actions, splittedUrlPath);
+  const { action, params } = mapUrl(actions, splittedUrlPath);
 
   if (action) {
     // let token = cookie.parse(req.headers.cookie || '').access_token;
@@ -58,6 +58,10 @@ app.use((req, res) => {
         if (reason && reason.redirect) {
           res.redirect(reason.redirect);
         } else {
+          if (reason.loadAuth) {
+            return res.end();
+          }
+
           console.error('API ERROR:', pretty.render(reason));
           res.status(reason.status || 500).json(reason);
         }

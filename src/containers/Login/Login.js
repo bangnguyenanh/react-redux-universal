@@ -8,11 +8,10 @@ import * as authActions from 'redux/modules/auth';
 import * as notifActions from 'redux/modules/notifs';
 
 @connect(state => ({ user: state.auth.user }), { ...notifActions, ...authActions })
+
 export default class Login extends Component {
   static propTypes = {
-    user: PropTypes.shape({
-      email: PropTypes.string
-    }),
+    user: PropTypes.shape({ email: PropTypes.string }),
     login: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired,
     notifSend: PropTypes.func.isRequired
@@ -30,7 +29,7 @@ export default class Login extends Component {
     if (err) return;
 
     try {
-      await this.props.login('facebook', data);
+      await this.props.login(data);
       this.successLogin();
     } catch (error) {
       if (error.message === 'Incomplete oauth registration') {
@@ -44,8 +43,8 @@ export default class Login extends Component {
     }
   };
 
-  login = async data => {
-    const result = await this.props.login('local', data);
+  login = async (data) => {
+    const result = await this.props.login(data);
     this.successLogin();
     return result;
   };
