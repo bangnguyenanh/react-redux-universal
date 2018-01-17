@@ -100,14 +100,16 @@ export default class App extends Component {
 
           <Navbar.Collapse>
             <Nav navbar>
-              <LinkContainer to="/chat">
-                <NavItem>Chat</NavItem>
+              {user && (
+                <LinkContainer to="/report">
+                  <NavItem>Report</NavItem>
+                </LinkContainer>
+              )}
+              <LinkContainer to="/blog">
+                <NavItem>Blog</NavItem>
               </LinkContainer>
-              <LinkContainer to="/widgets">
-                <NavItem>Widgets</NavItem>
-              </LinkContainer>
-              <LinkContainer to="/survey">
-                <NavItem>Survey</NavItem>
+              <LinkContainer to="/faq">
+                <NavItem>FAQ</NavItem>
               </LinkContainer>
               <LinkContainer to="/about">
                 <NavItem>About Us</NavItem>
