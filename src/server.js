@@ -75,6 +75,15 @@ proxy.on('error', (error, req, res) => {
   }));
 });
 
+const hydrate = () => {
+  res.write('<!doctype html>');
+  ReactDOM.renderToNodeStream(<Html assets={webpackIsomorphicTools.assets()} store={store} />).pipe(res);
+}
+
+const redirect = (to) => {
+  throw new VError({ name: 'RedirectError', info: { to } });
+};
+
 app.use((req, res) => {
   if (__DEVELOPMENT__) {
     // Do not cache webpack stats: the script file would change since
@@ -85,11 +94,6 @@ app.use((req, res) => {
   const memoryHistory = createHistory(req.originalUrl);
   const store = createStore(memoryHistory, client);
   const history = syncHistoryWithStore(memoryHistory, store);
-
-  function hydrate() {
-    res.write('<!doctype html>');
-    ReactDOM.renderToNodeStream(<Html assets={webpackIsomorphicTools.assets()} store={store} />).pipe(res);
-  }
 
   if (__DISABLE_SSR__) {
     return hydrate();
@@ -109,10 +113,6 @@ app.use((req, res) => {
         res.status(500);
         hydrate();
       } else if (renderProps) {
-        const redirect = to => {
-          throw new VError({ name: 'RedirectError', info: { to } });
-        };
-
         try {
           await loadOnServer({
             ...renderProps,
