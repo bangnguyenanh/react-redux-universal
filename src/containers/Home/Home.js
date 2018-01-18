@@ -127,7 +127,7 @@ function GuestHomepage(props) {
           <h2 className="mb-4">Free Download at Start Bootstrap!</h2>
           <a className="btn btn-light btn-xl sr-button" href="http://startbootstrap.com/template-overviews/creative/">
             Download Now!
-            </a>
+          </a>
         </div>
       </section>
 
@@ -163,7 +163,15 @@ function GuestHomepage(props) {
 
 function LoggedInHompage(props) {
   return (
-    <h1>Logged In</h1>
+    <section>
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-12">
+            <h1>Logged In</h1>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
