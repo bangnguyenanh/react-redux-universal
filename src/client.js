@@ -72,8 +72,7 @@ global.socket = initSocket();
       ReactDOM.hydrate(
         <HotEnabler>
           <Provider store={store} key="provider">
-            <Router {...renderProps} render={renderRouter} history={history}>
-              {routes}
+            <Router {...renderProps} render={renderRouter} history={history} routes={routes}>
             </Router>
           </Provider>
         </HotEnabler>,
