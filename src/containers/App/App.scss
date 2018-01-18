@@ -19,6 +19,7 @@
 
 .appContent {
   padding-top: 50px;
+  min-height: calc(100vh - 45px); // exclude the height of footer
   position: relative;
 }
 
@@ -28,6 +29,8 @@
 
 .footer {
   margin-bottom: 0;
+  padding: 10px 0;
+  height: 45px;
 }
 
 :global(.form-control-feedback) {
