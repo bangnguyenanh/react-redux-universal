@@ -81,7 +81,7 @@ global.socket = initSocket();
     });
   };
 
-  render(getRoutes(store));
+  render(getRoutes());
 
   if (module.hot) {
     module.hot.accept('./routes', () => {

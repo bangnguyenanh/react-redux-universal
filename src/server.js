@@ -98,7 +98,7 @@ app.use((req, res) => {
   match(
     {
       history,
-      routes: getRoutes(store),
+      routes: getRoutes(),
       location: req.originalUrl
     },
     async (error, redirectLocation, renderProps) => {
