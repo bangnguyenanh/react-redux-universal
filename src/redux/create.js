@@ -5,7 +5,9 @@ import createMiddleware from './middleware/clientMiddleware';
 import createReducers from './reducer';
 
 export function inject(store, name, asyncReducer) {
-  if (store.asyncReducers[name]) return;
+  if (store.asyncReducers[name])
+    return;
+
   store.asyncReducers[name] = asyncReducer;
   store.replaceReducer(combineReducers(createReducers(store.asyncReducers)));
 }
@@ -18,10 +20,11 @@ function getMissingReducers(reducers, data) {
   );
 }
 
-export default function createStore(history, { client }, data, persistConfig = null) {
-  const middleware = [createMiddleware({ client }), routerMiddleware(history)];
+export default function createStore(history, client, data, persistConfig = null) {
+  const middleware = [createMiddleware(client), routerMiddleware(history)];
 
   let enhancers = [applyMiddleware(...middleware)];
+  
   if (__CLIENT__ && __DEVTOOLS__) {
     const { persistState } = require('redux-devtools');
     const DevTools = require('../containers/DevTools/DevTools');

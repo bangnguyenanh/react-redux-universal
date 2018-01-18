@@ -32,6 +32,7 @@ function initSocket() {
     console.log(data);
     socket.emit('my other event', { my: 'data from client' });
   });
+  
   socket.on('msg', data => {
     console.log(data);
   });
@@ -50,18 +51,14 @@ global.socket = initSocket();
   }
 
   const data = !online ? { ...storedData, ...window.__data, online } : { ...window.__data, online };
-  const store = createStore(browserHistory, { client }, data, offlinePersistConfig);
+  const store = createStore(browserHistory, client, data, offlinePersistConfig);
   const history = syncHistoryWithStore(browserHistory, store);
-
   const redirect = bindActionCreators(replace, store.dispatch);
 
   const renderRouter = props => (
     <ReduxAsyncConnect
       {...props}
-      helpers={{
-        client,
-        redirect
-      }}
+      helpers={{ client, redirect }}
       filter={item => !item.deferred}
       render={applyRouterMiddleware(useScroll())}
     />
@@ -103,6 +100,7 @@ global.socket = initSocket();
     const devToolsDest = document.createElement('div');
     window.document.body.insertBefore(devToolsDest, null);
     const DevTools = require('./containers/DevTools/DevTools');
+
     ReactDOM.hydrate(
       <Provider store={store} key="provider">
         <DevTools />

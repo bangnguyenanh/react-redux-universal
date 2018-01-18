@@ -93,14 +93,14 @@ export default function reducer(state = initialState, action = {}) {
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: client => client.get('/widget/load/param1/param2') // params not used, just shown as demonstration
+    promise: (client) => client.get('/widget/load/param1/param2') // params not used, just shown as demonstration
   };
 }
 
 export function getAccessToken(code) {
   return {
     types: [GET_ACCESS_TOKEN, GET_ACCESS_TOKEN_SUCCESS, GET_ACCESS_TOKEN_FAIL],
-    promise: client => client.post('/pinterest/accesstoken', {
+    promise: (client) => client.post('/pinterest/accesstoken', {
       data: {
         grant_type: 'authorization_code',
         client_id: '4887843471106260088',
@@ -114,7 +114,7 @@ export function getAccessToken(code) {
 export function createBoard(accessToken, name, description) {
   return {
     types: [CREATE_BOARD, CREATE_BOARD_SUCCESS, CREATE_BOARD_FAIL],
-    promise: client => client.post('/pinterest/createBoard', {
+    promise: (client) => client.post('/pinterest/createBoard', {
       data: {
         accessToken,
         name,
@@ -127,7 +127,7 @@ export function createBoard(accessToken, name, description) {
 export function uploadImageToBoard(accessToken) {
   return {
     types: [UPLOAD_IMAGE_TO_BOARD, UPLOAD_IMAGE_TO_BOARD_SUCCESS, UPLOAD_IMAGE_TO_BOARD_FAIL],
-    promise: client => client.post('/pinterest/uploadImageToBoard', {
+    promise: (client) => client.post('/pinterest/uploadImageToBoard', {
       data: {
         accessToken,
         board: 'reviewskingdom/my-board',

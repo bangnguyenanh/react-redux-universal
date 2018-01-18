@@ -64,13 +64,15 @@ proxy.on('error', (error, req, res) => {
   if (error.code !== 'ECONNRESET') {
     console.error('proxy error', error);
   }
-  
-  // if (!res.headersSent) {
-  //   res.writeHead(500, { 'content-type': 'application/json' });
-  // }
 
-  const json = { error: 'proxy_error', reason: error.message };
-  res.end(JSON.stringify(json));
+  if (!res.headersSent) {
+    res.writeHead(500, { 'content-type': 'application/json' });
+  }
+
+  res.end(JSON.stringify({
+    error: 'proxy_error',
+    reason: error.message
+  }));
 });
 
 app.use((req, res) => {
@@ -79,11 +81,9 @@ app.use((req, res) => {
     // hot module replacement is enabled in the development env
     webpackIsomorphicTools.refresh();
   }
-  const providers = {
-    client: apiClient(req)
-  };
+  const client = apiClient(req);
   const memoryHistory = createHistory(req.originalUrl);
-  const store = createStore(memoryHistory, providers);
+  const store = createStore(memoryHistory, client);
   const history = syncHistoryWithStore(memoryHistory, store);
 
   function hydrate() {
@@ -112,11 +112,12 @@ app.use((req, res) => {
         const redirect = to => {
           throw new VError({ name: 'RedirectError', info: { to } });
         };
+
         try {
           await loadOnServer({
             ...renderProps,
             store,
-            helpers: { ...providers, redirect },
+            helpers: { client, redirect },
             filter: item => !item.deferred
           });
 
