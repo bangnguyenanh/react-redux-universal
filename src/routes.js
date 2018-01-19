@@ -1,20 +1,20 @@
 import { routerActions } from 'react-router-redux';
-import { connectedRouterRedirect } from 'redux-auth-wrapper/history3/redirect';
-import { App, Home, Register, NotFound } from 'containers';
+import { connectedRouterRedirect } from 'redux-auth-wrapper/history4/redirect';
+import { App, Home, Login, Register, NotFound } from 'containers';
 
 // eslint-disable-next-line import/no-dynamic-require
 if (typeof System.import === 'undefined') {
   System.import = (module) => Promise.resolve(require(module));
 }
 
-export const UserIsAuthenticated = connectedRouterRedirect({
+const isAuthenticated = connectedRouterRedirect({
   authenticatedSelector: state => state.auth.user,
   redirectPath: '/login',
   redirectAction: routerActions.replace,
   wrapperDisplayName: 'UserIsAuthenticated'
 });
 
-export const UserIsNotAuthenticated = connectedRouterRedirect({
+const isNotAuthenticated = connectedRouterRedirect({
   authenticatedSelector: state => !state.auth.user,
   redirectAction: routerActions.replace,
   redirectPath: '/',
@@ -22,43 +22,11 @@ export const UserIsNotAuthenticated = connectedRouterRedirect({
   wrapperDisplayName: 'UserIsNotAuthenticated'
 });
 
-
 export default [{
   component: App,
   routes: [
-    {
-      path: '/',
-      exact: true,
-      component: Home
-    }, {
-      path: '/register',
-      component: Register
-    }
+    { path: '/', exact: true, component: Home },
+    { path: '/login', component: isNotAuthenticated(Login) },
+    { path: '/register', component: isNotAuthenticated(Register) }
   ],
 }];
-
-
-// export default () => ({
-//   path: '/',
-//   component: App,
-//   indexRoute: { component: Home },
-//   childRoutes: [
-//     {
-//       path: '/register',
-//       getComponent: () => System.import('./containers/Register/Register')
-//     },
-//     {
-//       path: '/login',
-//       getComponent: () => System.import('./containers/Login/Login')
-//     },
-//     {
-//       path: '/about',
-//       getComponent: () => System.import('./containers/About/About')
-//     },
-//     {
-//       path: '*',
-//       component: NotFound,
-//       status: 404
-//     }
-//   ]
-// });

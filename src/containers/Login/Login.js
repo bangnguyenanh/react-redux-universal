@@ -6,9 +6,7 @@ import LoginForm from 'components/LoginForm/LoginForm';
 import FacebookLogin from 'components/FacebookLogin/FacebookLogin';
 import * as authActions from 'redux/modules/auth';
 import * as notifActions from 'redux/modules/notifs';
-import { UserIsNotAuthenticated } from 'routes';
 
-@UserIsNotAuthenticated
 @connect(state => ({ user: state.auth.user }), { ...notifActions, ...authActions })
 
 export default class Login extends Component {
