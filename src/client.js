@@ -1,22 +1,22 @@
-/**
- * THIS IS THE ENTRY POINT FOR THE CLIENT, JUST LIKE server.js IS THE ENTRY POINT FOR THE SERVER.
+/*
+ * THE ENTRY POINT FOR THE CLIENT
  */
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
+import BrowserRouter from 'react-router-dom/BrowserRouter';
+import Loadable from 'react-loadable';
+import localForage from 'localforage';
 import { ReduxAsyncConnect } from 'redux-connect';
 import { AppContainer as HotEnabler } from 'react-hot-loader';
 import { getStoredState } from 'redux-persist';
-import localForage from 'localforage';
 import { socket } from 'app';
 import { Provider } from 'react-redux';
 import createStore from './redux/create';
 import apiClient from './helpers/apiClient';
 import routes from './routes';
 import isOnline from './utils/isOnline';
-import createBrowserHistory from 'history/createBrowserHistory';
-import { ConnectedRouter } from 'react-router-redux';
-import BrowserRouter from 'react-router-dom/BrowserRouter';
 
 const offlinePersistConfig = {
   storage: localForage,
@@ -53,19 +53,29 @@ global.socket = initSocket();
   const history = createBrowserHistory();
   const store = createStore(history, client, data, offlinePersistConfig);
 
-  ReactDOM.hydrate(
-    <Provider store={store}>
-      <BrowserRouter>
-        <ReduxAsyncConnect routes={routes} helpers={{ client }} />
-      </BrowserRouter>
-    </Provider>
-    , dest
-  )
+  const hydrate = _routes => {
+    ReactDOM.hydrate(
+      <HotEnabler>
+        <Provider store={store}>
+          <BrowserRouter>
+            <ReduxAsyncConnect routes={_routes} helpers={{ client }} />
+          </BrowserRouter>
+        </Provider>
+      </HotEnabler>
+      , dest
+    );
+  };
+
+  await Loadable.preloadReady();
+
+  hydrate(routes);
 
   if (module.hot) {
     module.hot.accept('./routes', () => {
-      const nextRoutes = require('./routes')(store);
-      render(nextRoutes);
+      const nextRoutes = require('./routes');
+      hydrate(nextRoutes).catch(err => {
+        console.error('Error on routes reload:', err);
+      });
     });
   }
 

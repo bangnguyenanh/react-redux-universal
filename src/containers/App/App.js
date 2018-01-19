@@ -36,7 +36,7 @@ import config from 'config';
 ])
 
 @connect(
-  (state) => ({
+  state => ({
     notifs: state.notifs,
     user: state.auth.user
   }),
@@ -53,7 +53,7 @@ export default class App extends Component {
     logout: PropTypes.func.isRequired,
     pushState: PropTypes.func.isRequired,
     route: PropTypes.objectOf(PropTypes.any).isRequired,
-    location: PropTypes.objectOf(PropTypes.any)
+    location: PropTypes.objectOf(PropTypes.any).isRequired
   };
 
   static defaultProps = {

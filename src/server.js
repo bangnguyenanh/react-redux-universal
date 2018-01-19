@@ -19,10 +19,10 @@ import config from 'config';
 import createStore from 'redux/create';
 import Html from 'helpers/Html';
 import routes from 'routes';
-import { parse as parseUrl } from 'url'
+import { parse as parseUrl } from 'url';
 
-process.on('unhandledRejection', (error) => {
-  console.error(error)
+process.on('unhandledRejection', error => {
+  console.error(error);
 });
 
 const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
@@ -49,7 +49,6 @@ app.use((req, res, next) => {
   return next();
 });
 
-// Proxy to API server
 app.use('/api', (req, res) => {
   proxy.web(req, res, { target: targetUrl });
 });
@@ -78,15 +77,6 @@ proxy.on('error', (error, req, res) => {
   }));
 });
 
-const hydrate = () => {
-  res.write('<!doctype html>');
-  ReactDOM.renderToNodeStream(<Html assets={webpackIsomorphicTools.assets()} store={store} />).pipe(res);
-}
-
-const redirect = (to) => {
-  throw new VError({ name: 'RedirectError', info: { to } });
-};
-
 app.use(async (req, res) => {
   if (__DEVELOPMENT__) {
     // Do not cache webpack stats: the script file would change since
@@ -95,17 +85,24 @@ app.use(async (req, res) => {
   }
 
   const url = req.originalUrl || req.url;
-  const location = parseUrl(url);;
+  const location = parseUrl(url);
   const client = apiClient(req);
-  const history = createMemoryHistory({ initialEntries: [req.originalUrl] });;
+  const history = createMemoryHistory({ initialEntries: [req.originalUrl] });
   const store = createStore(history, client);
+
+  const hydrate = () => {
+    res.write('<!doctype html>');
+    ReactDOM.renderToNodeStream(<Html assets={webpackIsomorphicTools.assets()} store={store} />).pipe(res);
+  };
 
   if (__DISABLE_SSR__) {
     return hydrate();
   }
 
   try {
-    await loadOnServer({ store, location, routes, helpers: { client } });
+    await loadOnServer({
+      store, location, routes, helpers: { client }
+    });
 
     const context = {};
 
@@ -117,7 +114,7 @@ app.use(async (req, res) => {
       </Provider>
     );
 
-    // TODO: 
+    // TODO: Implement redirect
     // if (context.url) {
     //   return res.redirect(302, context.url);
     // }
@@ -127,16 +124,14 @@ app.use(async (req, res) => {
     global.navigator = { userAgent: req.headers['user-agent'] };
 
     res.status(200).send(`<!doctype html>${ReactDOM.renderToString(html)}`);
-
   } catch (error) {
-    if (mountError.name === 'RedirectError') {
-      return res.redirect(VError.info(mountError).to);
+    if (error.name === 'RedirectError') {
+      return res.redirect(VError.info(error).to);
     }
-    console.error('MOUNT ERROR:', pretty.render(mountError));
+    console.error('MOUNT ERROR:', pretty.render(error));
     res.status(500);
     hydrate();
   }
-
 });
 
 if (config.port) {
