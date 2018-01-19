@@ -27,6 +27,7 @@ export default [{
   routes: [
     { path: '/', exact: true, component: Home },
     { path: '/login', component: isNotAuthenticated(Login) },
-    { path: '/register', component: isNotAuthenticated(Register) }
+    { path: '/register', component: isNotAuthenticated(Register) },
+    { path: "*", component: NotFound }
   ],
 }];
