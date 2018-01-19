@@ -1,20 +1,13 @@
-/**
- *  Point of contact for component modules
- *
- *  ie: import { CounterButton, InfoBar } from 'components';
- *
- */
-
-export CounterButton from './CounterButton/CounterButton';
+export { default as CounterButton } from './CounterButton/CounterButton';
 // export FacebookLogin from './FacebookLogin/FacebookLogin';
-export GithubButton from './GithubButton/GithubButton';
-export InfoBar from './InfoBar/InfoBar';
+export { default as GithubButton } from './GithubButton/GithubButton';
+export { default as InfoBar } from './InfoBar/InfoBar';
 // export LoginForm from './LoginForm/LoginForm';
 // export MiniInfoBar from './MiniInfoBar/MiniInfoBar';
-export Notifs from './Notifs/Notifs';
-export Provider from './Provider/Provider';
-export PortfolioBox from './PortfolioBox/PortfolioBox';
-export ServiceBox from './ServiceBox/ServiceBox';
+export { default as Notifs } from './Notifs/Notifs';
+export { default as Provider } from './Provider/Provider';
+export { default as PortfolioBox } from './PortfolioBox/PortfolioBox';
+export { default as ServiceBox } from './ServiceBox/ServiceBox';
 // export RegisterForm from './RegisterForm/RegisterForm';
 // export SurveyForm from './SurveyForm/SurveyForm';
 // export WidgetForm from './WidgetForm/WidgetForm';

@@ -9,7 +9,8 @@ var assetsPath = path.resolve(__dirname, '../static/dist');
 var host = (process.env.HOST || 'localhost');
 var port = (+process.env.PORT + 1) || 3001;
 
-// https://github.com/halt-hammerzeit/webpack-isomorphic-tools
+var ReactLoadablePlugin = require('react-loadable/webpack').ReactLoadablePlugin;
+
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
 
@@ -31,10 +32,6 @@ combinedPlugins = combinedPlugins.concat(babelrcObjectDevelopment.plugins);
 
 var babelLoaderQuery = Object.assign({}, babelrcObject, babelrcObjectDevelopment, { plugins: combinedPlugins });
 delete babelLoaderQuery.env;
-
-babelLoaderQuery.presets = babelLoaderQuery.presets.map(function (v) {
-  return v === 'es2015' ? ['es2015', { modules: false }] : v;
-});
 
 var webpackConfig = module.exports = {
   devtool: 'inline-source-map',
@@ -156,5 +153,9 @@ var webpackConfig = module.exports = {
     }),
 
     webpackIsomorphicToolsPlugin.development(),
+    
+    new ReactLoadablePlugin({
+      filename: path.join(assetsPath, 'loadable-chunks.json')
+    })
   ]
 };
