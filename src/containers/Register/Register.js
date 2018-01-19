@@ -7,14 +7,12 @@ import * as authActions from 'redux/modules/auth';
 import * as notifActions from 'redux/modules/notifs';
 import { UserIsNotAuthenticated } from 'routes';
 
-@UserIsNotAuthenticated
+//@UserIsNotAuthenticated
 @connect(() => ({}), { ...notifActions, ...authActions })
 
 export default class Register extends Component {
   static propTypes = {
-    location: PropTypes.shape({
-      state: PropTypes.object
-    }).isRequired,
+    location: PropTypes.shape({ state: PropTypes.object }).isRequired,
     register: PropTypes.func.isRequired,
     notifSend: PropTypes.func.isRequired
   };

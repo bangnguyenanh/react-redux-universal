@@ -4,20 +4,19 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { applyRouterMiddleware, Router, browserHistory, match } from 'react-router';
-import { bindActionCreators } from 'redux';
-import { syncHistoryWithStore, replace } from 'react-router-redux';
 import { ReduxAsyncConnect } from 'redux-connect';
 import { AppContainer as HotEnabler } from 'react-hot-loader';
-import { useScroll } from 'react-router-scroll';
 import { getStoredState } from 'redux-persist';
 import localForage from 'localforage';
 import { socket } from 'app';
-import { Provider } from 'components';
+import { Provider } from 'react-redux';
 import createStore from './redux/create';
 import apiClient from './helpers/apiClient';
-import getRoutes from './routes';
+import routes from './routes';
 import isOnline from './utils/isOnline';
+import createBrowserHistory from 'history/createBrowserHistory';
+import { ConnectedRouter } from 'react-router-redux';
+import BrowserRouter from 'react-router-dom/BrowserRouter';
 
 const offlinePersistConfig = {
   storage: localForage,
@@ -32,7 +31,7 @@ function initSocket() {
     console.log(data);
     socket.emit('my other event', { my: 'data from client' });
   });
-  
+
   socket.on('msg', data => {
     console.log(data);
   });
@@ -51,34 +50,17 @@ global.socket = initSocket();
   }
 
   const data = !online ? { ...storedData, ...window.__data, online } : { ...window.__data, online };
-  const store = createStore(browserHistory, client, data, offlinePersistConfig);
-  const history = syncHistoryWithStore(browserHistory, store);
-  const redirect = bindActionCreators(replace, store.dispatch);
+  const history = createBrowserHistory();
+  const store = createStore(history, client, data, offlinePersistConfig);
 
-  const renderRouter = props => (
-    <ReduxAsyncConnect
-      {...props}
-      helpers={{ client, redirect }}
-      filter={item => !item.deferred}
-      render={applyRouterMiddleware(useScroll())}
-    />
-  );
-
-  const render = routes => {
-    match({ history, routes }, (error, redirectLocation, renderProps) => {
-      ReactDOM.hydrate(
-        <HotEnabler>
-          <Provider store={store} key="provider">
-            <Router {...renderProps} render={renderRouter} history={history} routes={routes}>
-            </Router>
-          </Provider>
-        </HotEnabler>,
-        dest
-      );
-    });
-  };
-
-  render(getRoutes());
+  ReactDOM.hydrate(
+    <Provider store={store}>
+      <BrowserRouter>
+        <ReduxAsyncConnect routes={routes} helpers={{ client }} />
+      </BrowserRouter>
+    </Provider>
+    , dest
+  )
 
   if (module.hot) {
     module.hot.accept('./routes', () => {

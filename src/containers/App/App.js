@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-connect';
 import { push } from 'react-router-redux';
+import renderRoutes from 'react-router-config/renderRoutes';
 
-import { IndexLink } from 'react-router';
-import { LinkContainer } from 'react-router-bootstrap';
+import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
@@ -48,12 +48,12 @@ import config from 'config';
 
 export default class App extends Component {
   static propTypes = {
-    children: PropTypes.element.isRequired,
-    router: PropTypes.shape({ location: PropTypes.object }).isRequired,
     user: PropTypes.shape({ email: PropTypes.string }),
     notifs: PropTypes.shape({ global: PropTypes.array }).isRequired,
     logout: PropTypes.func.isRequired,
-    pushState: PropTypes.func.isRequired
+    pushState: PropTypes.func.isRequired,
+    route: PropTypes.objectOf(PropTypes.any).isRequired,
+    location: PropTypes.objectOf(PropTypes.any)
   };
 
   static defaultProps = {
@@ -81,7 +81,7 @@ export default class App extends Component {
   };
 
   render() {
-    const { user, notifs, children } = this.props;
+    const { user, notifs, route } = this.props;
     const styles = require('./App.scss');
 
     return (
@@ -90,10 +90,11 @@ export default class App extends Component {
         <Navbar fixedTop>
           <Navbar.Header>
             <Navbar.Brand>
-              <IndexLink to="/" activeStyle={{ color: '#33e0ff' }}>
-                <div className={styles.brand} />
-                <span>{config.app.title}</span>
-              </IndexLink>
+              <IndexLinkContainer to="/" activeStyle={{ color: '#33e0ff' }} className={styles.title}>
+                <div className={styles.brand}>
+                  <span className={styles.siteName}>{config.app.title}</span>
+                </div>
+              </IndexLinkContainer>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
@@ -152,7 +153,7 @@ export default class App extends Component {
             </div>
           )}
 
-          {children}
+          {renderRoutes(route.routes)}
         </div>
 
         <div className={`${styles.footer} well text-center`}>

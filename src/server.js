@@ -1,4 +1,4 @@
-import express from 'express';
+import Express from 'express';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import favicon from 'serve-favicon';
@@ -9,29 +9,32 @@ import VError from 'verror';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import httpProxy from 'http-proxy';
-import { match } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import apiClient from 'helpers/apiClient';
+
+import { StaticRouter } from 'react-router';
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect';
-import createHistory from 'react-router/lib/createMemoryHistory';
-import { Provider } from 'components';
+import createMemoryHistory from 'history/createMemoryHistory';
+import { Provider } from 'react-redux';
 import config from 'config';
 import createStore from 'redux/create';
-import apiClient from 'helpers/apiClient';
 import Html from 'helpers/Html';
-import getRoutes from 'routes';
+import routes from 'routes';
+import { parse as parseUrl } from 'url'
 
-process.on('unhandledRejection', error => console.error(error));
+process.on('unhandledRejection', (error) => {
+  console.error(error)
+});
 
 const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
 const pretty = new PrettyError();
-const app = express();
+const app = Express();
 const server = new http.Server(app);
 const proxy = httpProxy.createProxyServer({ target: targetUrl, ws: true });
 
 app.use(cookieParser());
 app.use(compression());
-
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
+
 app.get('/manifest.json', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'manifest.json')));
 
 app.use('/dist/service-worker.js', (req, res, next) => {
@@ -39,7 +42,7 @@ app.use('/dist/service-worker.js', (req, res, next) => {
   return next();
 });
 
-app.use(express.static(path.join(__dirname, '..', 'static')));
+app.use(Express.static(path.join(__dirname, '..', 'static')));
 
 app.use((req, res, next) => {
   res.setHeader('X-Forwarded-For', req.ip);
@@ -84,69 +87,56 @@ const redirect = (to) => {
   throw new VError({ name: 'RedirectError', info: { to } });
 };
 
-app.use((req, res) => {
+app.use(async (req, res) => {
   if (__DEVELOPMENT__) {
     // Do not cache webpack stats: the script file would change since
     // hot module replacement is enabled in the development env
     webpackIsomorphicTools.refresh();
   }
+
+  const url = req.originalUrl || req.url;
+  const location = parseUrl(url);;
   const client = apiClient(req);
-  const memoryHistory = createHistory(req.originalUrl);
-  const store = createStore(memoryHistory, client);
-  const history = syncHistoryWithStore(memoryHistory, store);
+  const history = createMemoryHistory({ initialEntries: [req.originalUrl] });;
+  const store = createStore(history, client);
 
   if (__DISABLE_SSR__) {
     return hydrate();
   }
 
-  match(
-    {
-      history,
-      routes: getRoutes(),
-      location: req.originalUrl
-    },
-    async (error, redirectLocation, renderProps) => {
-      if (redirectLocation) {
-        res.redirect(redirectLocation.pathname + redirectLocation.search);
-      } else if (error) {
-        console.error('ROUTER ERROR:', pretty.render(error));
-        res.status(500);
-        hydrate();
-      } else if (renderProps) {
-        try {
-          await loadOnServer({
-            ...renderProps,
-            store,
-            helpers: { client, redirect },
-            filter: item => !item.deferred
-          });
+  try {
+    await loadOnServer({ store, location, routes, helpers: { client } });
 
-          const component = (
-            <Provider store={store} key="provider">
-              <ReduxAsyncConnect {...renderProps} />
-            </Provider>
-          );
+    const context = {};
 
-          const html = <Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />;
+    const component = (
+      <Provider store={store} key="provider">
+        <StaticRouter location={req.url} context={context}>
+          <ReduxAsyncConnect routes={routes} helpers={{ client }} />
+        </StaticRouter>
+      </Provider>
+    );
 
-          res.status(200);
+    // TODO: 
+    // if (context.url) {
+    //   return res.redirect(302, context.url);
+    // }
 
-          global.navigator = { userAgent: req.headers['user-agent'] };
+    const html = <Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />;
 
-          res.send(`<!doctype html>${ReactDOM.renderToString(html)}`);
-        } catch (mountError) {
-          if (mountError.name === 'RedirectError') {
-            return res.redirect(VError.info(mountError).to);
-          }
-          console.error('MOUNT ERROR:', pretty.render(mountError));
-          res.status(500);
-          hydrate();
-        }
-      } else {
-        res.status(404).send('Not found');
-      }
+    global.navigator = { userAgent: req.headers['user-agent'] };
+
+    res.status(200).send(`<!doctype html>${ReactDOM.renderToString(html)}`);
+
+  } catch (error) {
+    if (mountError.name === 'RedirectError') {
+      return res.redirect(VError.info(mountError).to);
     }
-  );
+    console.error('MOUNT ERROR:', pretty.render(mountError));
+    res.status(500);
+    hydrate();
+  }
+
 });
 
 if (config.port) {
