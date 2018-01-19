@@ -11,8 +11,9 @@ import localForage from 'localforage';
 import { ReduxAsyncConnect } from 'redux-connect';
 import { AppContainer as HotEnabler } from 'react-hot-loader';
 import { getStoredState } from 'redux-persist';
-import { socket } from 'app';
 import { Provider } from 'react-redux';
+
+import socket, { initSocket } from './socket';
 import createStore from './redux/create';
 import apiClient from './helpers/apiClient';
 import routes from './routes';
@@ -25,19 +26,6 @@ const offlinePersistConfig = {
 
 const client = apiClient();
 const dest = document.getElementById('content');
-
-function initSocket() {
-  socket.on('news', data => {
-    console.log(data);
-    socket.emit('my other event', { my: 'data from client' });
-  });
-
-  socket.on('msg', data => {
-    console.log(data);
-  });
-
-  return socket;
-}
 
 global.socket = initSocket();
 

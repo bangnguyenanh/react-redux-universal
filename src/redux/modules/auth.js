@@ -1,4 +1,3 @@
-import { socket } from 'app';
 import { SubmissionError } from 'redux-form';
 import jsCookie from 'js-cookie';
 
@@ -12,8 +11,6 @@ const REGISTER = 'redux-example/auth/REGISTER';
 const REGISTER_SUCCESS = 'redux-example/auth/REGISTER_SUCCESS';
 const REGISTER_FAIL = 'redux-example/auth/REGISTER_FAIL';
 const LOGOUT = 'redux-example/auth/LOGOUT';
-const LOGOUT_SUCCESS = 'redux-example/auth/LOGOUT_SUCCESS';
-const LOGOUT_FAIL = 'redux-example/auth/LOGOUT_FAIL';
 
 const initialState = {
   loaded: false
@@ -86,7 +83,7 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-const catchValidation = (error) => {
+const catchValidation = error => {
   if (error.message) {
     if (error.message === 'Validation failed' && error.data) {
       throw new SubmissionError(error.data);
@@ -107,8 +104,8 @@ export function isAuthLoaded(state) {
 export function loadAuth() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: async (client) => {
-      const result = await client.post("/auth/load");
+    promise: async client => {
+      const result = await client.post('/auth/load');
       return result;
     }
   };
@@ -117,8 +114,8 @@ export function loadAuth() {
 export function register(data) {
   return {
     types: [REGISTER, REGISTER_SUCCESS, REGISTER_FAIL],
-    promise: async (client) => {
-      const result = client.post("/auth/register", { ...data, fullName: "bangnguyen" });
+    promise: async client => {
+      const result = client.post('/auth/register', { ...data, fullName: 'bangnguyen' });
       return result;
     }
   };
@@ -127,10 +124,10 @@ export function register(data) {
 export function login(data) {
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-    promise: async (client) => {
+    promise: async client => {
       try {
-        const result = await client.post("/auth/login", { ...data, source: "webapp" });
-        jsCookie.set("accessToken", result.accessToken);
+        const result = await client.post('/auth/login', { ...data, source: 'webapp' });
+        jsCookie.set('accessToken', result.accessToken);
         return result;
       } catch (error) {
         return catchValidation(error);
@@ -140,7 +137,7 @@ export function login(data) {
 }
 
 export function logout() {
-  jsCookie.remove("accessToken");
+  jsCookie.remove('accessToken');
   return {
     type: LOGOUT
   };
