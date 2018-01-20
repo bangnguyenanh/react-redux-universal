@@ -40,7 +40,8 @@
     "import/extensions": "off",
     "import/no-extraneous-dependencies": "off",
     "import/no-named-as-default": "error",
-    "import/no-unresolved": "off"
+    "import/no-unresolved": "off",
+    "linebreak-style": 0
   },
   "plugins": [
     "react",
