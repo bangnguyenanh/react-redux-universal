@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { PortfolioBox, ServiceBox } from 'components';
+import { LoggedInHomepage, PortfolioBox, ServiceBox } from 'components';
 
 function GuestHomepage() {
   const styles = require('./Home.scss');
@@ -162,46 +162,6 @@ function GuestHomepage() {
   );
 }
 
-function LoggedInHompage() {
-  const styles = require('./Home.scss');
-  return (
-    <section className={styles.loggedInSection}>
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className={styles.jarsWrapper}>
-              <button className={styles.jar} title="Necessities">
-                <i className="fa fa-glass" />
-                NEC
-              </button>
-              <button className={styles.jar} title="Play">
-                <i className="fa fa-gamepad" />
-                PLAY
-              </button>
-              <button className={styles.jar} title="Education">
-                <i className="fa fa-book" />
-                EDU
-              </button>
-              <button className={styles.jar} title="Long Term Savings for Spending">
-                <i className="fa fa-paper-plane-o" />
-                LTSS
-              </button>
-              <button className={styles.jar} title="Financial Freedom Account">
-                <i className="fa fa-money" />
-                FFA
-              </button>
-              <button className={styles.jar} title="Give">
-                <i className="fa fa-handshake-o" />
-                GIVE
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 @connect(state => ({
   user: state.auth.user
 }))
@@ -220,7 +180,7 @@ export default class Home extends Component {
 
   render() {
     return (
-      this.props.user ? <LoggedInHompage /> : <GuestHomepage />
+      this.props.user ? <LoggedInHomepage /> : <GuestHomepage />
     );
   }
 }

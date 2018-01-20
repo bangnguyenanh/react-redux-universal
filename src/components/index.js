@@ -8,6 +8,7 @@ export { default as Notifs } from './Notifs/Notifs';
 export { default as Provider } from './Provider/Provider';
 export { default as PortfolioBox } from './PortfolioBox/PortfolioBox';
 export { default as ServiceBox } from './ServiceBox/ServiceBox';
+export { default as LoggedInHomepage } from './LoggedInHomepage/LoggedInHomepage';
 // export RegisterForm from './RegisterForm/RegisterForm';
 // export SurveyForm from './SurveyForm/SurveyForm';
 // export WidgetForm from './WidgetForm/WidgetForm';
