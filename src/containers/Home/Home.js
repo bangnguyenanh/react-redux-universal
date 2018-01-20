@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
-import config from 'config';
-import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { PortfolioBox, ServiceBox } from 'components';
 
-function GuestHomepage(props) {
+function GuestHomepage() {
   const styles = require('./Home.scss');
   const imgThumb1 = require('./img/portfolio/thumbnails/1.jpg');
   const imgThumb2 = require('./img/portfolio/thumbnails/2.jpg');
@@ -30,10 +27,10 @@ function GuestHomepage(props) {
               <p className="text-faded mb-5">
                 Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download
                   your template and start going, no strings attached!
-                </p>
+              </p>
               <a className="btn btn-primary btn-xl js-scroll-trigger" href="#about">
                 Find Out More
-                </a>
+              </a>
             </div>
           </div>
         </div>
@@ -49,10 +46,10 @@ function GuestHomepage(props) {
                 Start Bootstrap has everything you need to get your new website up and running in no time! All of the
                   templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings
                   attached!
-                </p>
+              </p>
               <a className="btn btn-light btn-xl js-scroll-trigger" href="#services">
                 Get Started!
-                </a>
+              </a>
             </div>
           </div>
         </div>
@@ -73,25 +70,29 @@ function GuestHomepage(props) {
               <ServiceBox
                 title="Sturdy Templates"
                 description="Our templates are updated regularly so they don't break."
-                icon="fa-diamond" />
+                icon="fa-diamond"
+              />
             </div>
             <div className="col-lg-3 col-md-6 text-center">
               <ServiceBox
                 title="Ready to Ship"
                 description="You can use this theme as is, or you can make changes!"
-                icon="fa-paper-plane" />
+                icon="fa-paper-plane"
+              />
             </div>
             <div className="col-lg-3 col-md-6 text-center">
               <ServiceBox
                 title="Up to Date"
                 description="We update dependencies to keep things fresh."
-                icon="fa-newspaper-o" />
+                icon="fa-newspaper-o"
+              />
             </div>
             <div className="col-lg-3 col-md-6 text-center">
               <ServiceBox
                 title="Made with Love"
                 description="You have to make your websites with love these days!"
-                icon="fa-heart" />
+                icon="fa-heart"
+              />
             </div>
           </div>
         </div>
@@ -140,7 +141,7 @@ function GuestHomepage(props) {
               <p className="mb-5">
                 Ready to start your next project with us? That's great! Give us a call or send us an email and we will
                   get back to you as soon as possible!
-                </p>
+              </p>
             </div>
           </div>
           <div className="row">
@@ -158,16 +159,42 @@ function GuestHomepage(props) {
         </div>
       </section>
     </div>
-  )
+  );
 }
 
-function LoggedInHompage(props) {
+function LoggedInHompage() {
+  const styles = require('./Home.scss');
   return (
-    <section>
+    <section className={styles.loggedInSection}>
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
-            <h1>Logged In</h1>
+            <div className={styles.jarsWrapper}>
+              <button className={styles.jar} title="Necessities">
+                <i className="fa fa-glass" />
+                NEC
+              </button>
+              <button className={styles.jar} title="Play">
+                <i className="fa fa-gamepad" />
+                PLAY
+              </button>
+              <button className={styles.jar} title="Education">
+                <i className="fa fa-book" />
+                EDU
+              </button>
+              <button className={styles.jar} title="Long Term Savings for Spending">
+                <i className="fa fa-paper-plane-o" />
+                LTSS
+              </button>
+              <button className={styles.jar} title="Financial Freedom Account">
+                <i className="fa fa-money" />
+                FFA
+              </button>
+              <button className={styles.jar} title="Give">
+                <i className="fa fa-handshake-o" />
+                GIVE
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -175,7 +202,7 @@ function LoggedInHompage(props) {
   );
 }
 
-@connect((state) => ({
+@connect(state => ({
   user: state.auth.user
 }))
 
@@ -186,6 +213,10 @@ export default class Home extends Component {
       fullName: PropTypes.string
     })
   };
+
+  static defaultProps = {
+    user: null
+  }
 
   render() {
     return (

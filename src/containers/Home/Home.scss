@@ -38,3 +38,21 @@
     }
   }
 }
+
+.jarsWrapper {
+  padding-top: 2rem;
+}
+
+.jar {
+  display: block;
+  width: 300px;
+  border-radius: 300px;
+  height: 60px;
+  margin: 1rem auto 0;
+  border: 0;
+  font-size: 1.5rem;
+}
+
+.loggedInSection {
+  padding: 0;
+}
