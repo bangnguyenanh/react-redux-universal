@@ -61,7 +61,6 @@ server.on('upgrade', (req, socket, head) => {
   proxy.ws(req, socket, head);
 });
 
-// added the error handling to avoid https://github.com/nodejitsu/node-http-proxy/issues/527
 proxy.on('error', (error, req, res) => {
   if (error.code !== 'ECONNRESET') {
     console.error('proxy error', error);
@@ -79,8 +78,6 @@ proxy.on('error', (error, req, res) => {
 
 app.use(async (req, res) => {
   if (__DEVELOPMENT__) {
-    // Do not cache webpack stats: the script file would change since
-    // hot module replacement is enabled in the development env
     webpackIsomorphicTools.refresh();
   }
 
@@ -120,8 +117,6 @@ app.use(async (req, res) => {
     // }
 
     const html = <Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />;
-
-    global.navigator = { userAgent: req.headers['user-agent'] };
 
     res.status(200).send(`<!doctype html>${ReactDOM.renderToString(html)}`);
   } catch (error) {
