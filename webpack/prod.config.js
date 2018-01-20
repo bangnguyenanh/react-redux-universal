@@ -165,8 +165,7 @@ module.exports = {
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: false,
-      __DEVTOOLS__: false,
-      __DLLS__: false
+      __DEVTOOLS__: false
     }),
 
     // ignore dev config
@@ -191,13 +190,13 @@ module.exports = {
     }),
 
     new SWPrecacheWebpackPlugin({
-      cacheId: 'react-redux-universal-hot-example',
+      cacheId: 'react-redux-universal',
       filename: 'service-worker.js',
       maximumFileSizeToCacheInBytes: 8388608,
 
       // Ensure all our static, local assets are cached.
       staticFileGlobs: [path.dirname(assetsPath) + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}'],
-      stripPrefix: path.dirname(assetsPath),
+      stripPrefix: path.dirname(assetsPath).replace(/\\/g, '/'),
 
       directoryIndex: '/',
       verbose: true,

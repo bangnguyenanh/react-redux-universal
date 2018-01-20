@@ -11,7 +11,6 @@ module.exports = {
     __CLIENT__: process.env.NODE_PATH === 'src',
     __SERVER__: process.env.NODE_PATH === 'api',
     __DEVELOPMENT__: true,
-    __DEVTOOLS__: false, // <-------- DISABLE redux-devtools HERE
-    __DLLS__: false
+    __DEVTOOLS__: false // <-------- DISABLE redux-devtools HERE
   }
 };
