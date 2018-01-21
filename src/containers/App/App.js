@@ -17,7 +17,7 @@ import Helmet from 'react-helmet';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isAuthLoaded, loadAuth, logout } from 'redux/modules/auth';
 
-import { Notifs } from 'components';
+import Notifs from 'components/Notifs/Notifs';
 import config from 'config';
 
 @asyncConnect([

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm, Field, propTypes } from 'redux-form';
-import { Input, DropdownSelect } from 'formElements';
+import Input from 'formElements/Input/Input';
+import DropdownSelect from 'formElements/DropdownSelect/DropdownSelect';
 
 @reduxForm({
   form: 'AddSpend'

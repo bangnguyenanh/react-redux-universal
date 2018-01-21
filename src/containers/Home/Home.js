@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { LoggedInHomepage, PortfolioBox, ServiceBox } from 'components';
+import LoggedInHomepage from 'components/LoggedInHomepage/LoggedInHomepage';
+import PortfolioBox from 'components/PortfolioBox/PortfolioBox';
+import ServiceBox from 'components/ServiceBox/ServiceBox';
 
 function GuestHomepage() {
   const styles = require('./Home.scss');

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm, Field, propTypes } from 'redux-form';
-import { Input } from 'formElements';
+import Input from 'formElements/Input/Input';
 import registerValidation from './registerValidation';
 
 @reduxForm({
