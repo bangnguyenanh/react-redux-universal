@@ -14,10 +14,12 @@ export default class Spend extends Component {
     const styles = require('./Spend.scss');
     return (
       <section className={styles.spendSection}>
-        <div className="row">
-          <div className="col-lg-12">
-            <h1>Hello Spend</h1>
-            <button onClick={this.fn}>Test</button>
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
+              <h1>Hello Spend</h1>
+              <button onClick={this.fn}>Test</button>
+            </div>
           </div>
         </div>
       </section>
