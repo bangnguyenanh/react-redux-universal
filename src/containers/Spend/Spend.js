@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import AddSpend from 'components/AddSpend/AddSpend';
 
 export default class Spend extends Component {
   static contextTypes = {
@@ -17,8 +18,7 @@ export default class Spend extends Component {
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
-              <h1>Hello Spend</h1>
-              <button onClick={this.fn}>Test</button>
+              <AddSpend />
             </div>
           </div>
         </div>
