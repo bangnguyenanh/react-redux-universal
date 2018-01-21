@@ -1,9 +1,9 @@
 import React from 'react';
 import Loadable from 'react-loadable';
 
-const LoginLoadable = Loadable({
-  loader: () => import('./Login'),
+const SpendLoadable = Loadable({
+  loader: () => import('./Spend'),
   loading: () => <div>Loading</div>
 });
 
-export default LoginLoadable;
+export default SpendLoadable;

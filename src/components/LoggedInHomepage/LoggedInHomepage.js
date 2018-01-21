@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { push } from 'react-router-redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
+@connect(null, { pushState: push })
+@withRouter
 export default class LoggedInHomepage extends Component {
+  static propTypes = {
+    pushState: PropTypes.func.isRequired
+  }
+
   handleJarClick = jarName => () => {
     console.log(jarName);
+    this.props.pushState('/spend');
   };
 
   render() {
@@ -19,15 +30,19 @@ export default class LoggedInHomepage extends Component {
                 </button>
                 <button className={styles.jar} title="Play" onClick={this.handleJarClick('PLAY')}>
                   <i className="fa fa-gamepad" />
-                  PLAY
+                  PLY
                 </button>
                 <button className={styles.jar} title="Education" onClick={this.handleJarClick('EDU')}>
                   <i className="fa fa-book" />
                   EDU
                 </button>
-                <button className={styles.jar} title="Long Term Savings for Spending" onClick={this.handleJarClick('LTSS')}>
+                <button
+                  className={styles.jar}
+                  title="Long Term Savings for Spending"
+                  onClick={this.handleJarClick('LTSS')}
+                >
                   <i className="fa fa-paper-plane-o" />
-                  LTSS
+                  LTS
                 </button>
                 <button className={styles.jar} title="Financial Freedom Account" onClick={this.handleJarClick('FFA')}>
                   <i className="fa fa-money" />
@@ -35,7 +50,7 @@ export default class LoggedInHomepage extends Component {
                 </button>
                 <button className={styles.jar} title="Give" onClick={this.handleJarClick('GIVE')}>
                   <i className="fa fa-handshake-o" />
-                  GIVE
+                  GIV
                 </button>
               </div>
             </div>

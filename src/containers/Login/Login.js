@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import LoginForm from 'components/LoginForm/LoginForm';
-import FacebookLogin from 'components/FacebookLogin/FacebookLogin';
 import * as authActions from 'redux/modules/auth';
 import * as notifActions from 'redux/modules/notifs';
 
@@ -43,7 +42,7 @@ export default class Login extends Component {
     }
   };
 
-  login = async (data) => {
+  login = async data => {
     const result = await this.props.login(data);
     this.successLogin();
     return result;
