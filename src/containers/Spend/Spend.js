@@ -1,28 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { push } from 'react-router-redux';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 
-@connect(null, {
-  pushState: push
-})
-@withRouter
 export default class Spend extends Component {
-  static propTypes = {
-    pushState: PropTypes.func.isRequired
+  static contextTypes = {
+    router: PropTypes.object.isRequired
   }
 
   fn = () => {
-    this.props.pushState('/');
+    this.context.router.history.push('/');
   }
 
   render() {
     const styles = require('./Spend.scss');
     return (
       <section className={styles.spendSection}>
-        <h1>Hello Spend</h1>
-        <button onClick={this.fn()}>Test</button>
+        <div className="row">
+          <div className="col-lg-12">
+            <h1>Hello Spend</h1>
+            <button onClick={this.fn}>Test</button>
+          </div>
+        </div>
       </section>
     );
   }

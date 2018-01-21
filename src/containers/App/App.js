@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-connect';
-import { push } from 'react-router-redux';
 import renderRoutes from 'react-router-config/renderRoutes';
 
 import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
@@ -19,7 +18,6 @@ import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isAuthLoaded, loadAuth, logout } from 'redux/modules/auth';
 
 import { Notifs } from 'components';
-
 import config from 'config';
 
 @asyncConnect([
@@ -41,8 +39,7 @@ import config from 'config';
     user: state.auth.user
   }),
   {
-    logout,
-    pushState: push
+    logout
   }
 )
 
@@ -51,7 +48,6 @@ export default class App extends Component {
     user: PropTypes.shape({ email: PropTypes.string }),
     notifs: PropTypes.shape({ global: PropTypes.array }).isRequired,
     logout: PropTypes.func.isRequired,
-    pushState: PropTypes.func.isRequired,
     route: PropTypes.objectOf(PropTypes.any).isRequired,
     location: PropTypes.objectOf(PropTypes.any).isRequired
   };
@@ -61,17 +57,18 @@ export default class App extends Component {
   };
 
   static contextTypes = {
-    store: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired,
+    router: PropTypes.shape({
+      history: PropTypes.object.isRequired
+    })
   };
 
   componentWillReceiveProps(nextProps) {
     if (!this.props.user && nextProps.user) {
-      // login
       const redirect = this.props.location.query && this.props.location.query.redirect;
-      this.props.pushState(redirect || '/loginSuccess');
+      this.context.router.history.pushState(redirect || '/loginSuccess');
     } else if (this.props.user && !nextProps.user) {
-      // logout
-      this.props.pushState('/');
+      this.context.router.history.pushState('/');
     }
   }
 

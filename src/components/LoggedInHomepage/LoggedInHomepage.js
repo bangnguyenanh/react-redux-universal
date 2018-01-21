@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { push } from 'react-router-redux';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
-@connect(null, { pushState: push })
-@withRouter
 export default class LoggedInHomepage extends Component {
-  static propTypes = {
-    pushState: PropTypes.func.isRequired
+  static contextTypes = {
+    router: PropTypes.object.isRequired
   }
 
   handleJarClick = jarName => () => {
     console.log(jarName);
-    this.props.pushState('/spend');
+    this.context.router.history.push('/spend');
   };
 
   render() {
