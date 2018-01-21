@@ -229,5 +229,8 @@
     "webpack-dev-middleware": "^2.0.4",
     "webpack-hot-middleware": "^2.21.0",
     "webpack-isomorphic-tools": "^3.0.5"
+  },
+  "engines": {
+    "node": ">=8.9"
   }
 }
