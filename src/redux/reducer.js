@@ -3,6 +3,7 @@ import { routerReducer } from 'react-router-redux';
 import { reducer as reduxAsyncConnect } from 'redux-connect';
 import { reducer as form } from 'redux-form';
 import auth from './modules/auth';
+import spend from './modules/spend';
 import notifs from './modules/notifs';
 import counter from './modules/counter';
 import info from './modules/info';
@@ -18,6 +19,7 @@ export default function createReducers(asyncReducers) {
     form,
     notifs,
     auth,
+    spend,
     counter: multireducer({
       counter1: counter,
       counter2: counter,

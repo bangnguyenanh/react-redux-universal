@@ -1,4 +1,4 @@
-export load from './load';
-export login from './login';
-export logout from './logout';
-export register from './register';
+export { default as load } from './load';
+export { default as login } from './login';
+export { default as logout } from './logout';
+export { default as register } from './register';

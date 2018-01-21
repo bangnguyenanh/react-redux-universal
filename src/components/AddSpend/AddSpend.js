@@ -14,16 +14,28 @@ export default class AddSpend extends Component {
   render() {
     const items = [
       {
-        value: 'Hello1',
-        label: 'Play'
+        value: 'nec',
+        label: 'Necessities'
       },
       {
-        value: 'Hello2',
+        value: 'edu',
         label: 'Education'
       },
       {
-        value: 'Hello3',
-        label: 'Necessities'
+        value: 'ply',
+        label: 'Play'
+      },
+      {
+        value: 'giv',
+        label: 'give'
+      },
+      {
+        value: 'lts',
+        label: 'Long term savings for spending'
+      },
+      {
+        value: 'ffa',
+        label: 'Freedom Financial Account'
       }
     ];
 

@@ -8,8 +8,7 @@ export default function load(req) {
       try {
         payload = parseToken(req.cookies.accessToken);
       } catch (e) {
-        res.clearCookie("accessToken");
-        reject("Cookie is not valid");
+        reject(new Error('Cookie is not valid'));
       }
 
       if (Math.round(new Date().getTime() / 1000) < payload.exp) {
@@ -31,14 +30,12 @@ export default function load(req) {
               email: user.email
             }
           });
-        })
-
+        });
       } else {
-        res.clearCookie("accessToken");
-        reject("Cookie expired!");
+        reject(new Error('Cookie expired!'));
       }
     } else {
       reject({ loadAuth: true });
     }
-  })
+  });
 }

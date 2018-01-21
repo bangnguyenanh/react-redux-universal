@@ -1,3 +1,4 @@
-export User from './User';
-export Card from './Card';
-export Device from './Device';
+export { default as User } from './User';
+export { default as Card } from './Card';
+export { default as Device } from './Device';
+export { default as Spend } from './Spend';

@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AddSpend from 'components/AddSpend/AddSpend';
+import { connect } from 'react-redux';
+import * as spendActions from 'redux/modules/spend';
 
+@connect(() => ({}), { ...spendActions })
 export default class Spend extends Component {
-  static contextTypes = {
-    router: PropTypes.object.isRequired
+  static propTypes = {
+    addSpend: PropTypes.func.isRequired
   }
 
-  fn = () => {
-    this.context.router.history.push('/');
+  addSpend = async data => {
+    await this.props.addSpend(data);
   }
 
   render() {
@@ -18,7 +21,7 @@ export default class Spend extends Component {
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
-              <AddSpend />
+              <AddSpend onSubmit={this.addSpend} />
             </div>
           </div>
         </div>
