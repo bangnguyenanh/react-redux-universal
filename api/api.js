@@ -2,16 +2,14 @@ import express from 'express';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import config from '../src/config';
-import * as actions from './actions/index';
-import { mapUrl } from './common/utils';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
 import mongoose from 'mongoose';
-import { parseToken } from './common/utils';
 import cookie from 'cookie';
-import { cardJob } from 'jobs';
+import config from '../src/config';
+import * as actions from './actions/index';
+import { mapUrl, parseToken } from './common/utils';
 
 const pretty = new PrettyError();
 const app = express();
@@ -40,21 +38,21 @@ app.use((req, res) => {
   const { action, params } = mapUrl(actions, splittedUrlPath);
 
   if (action) {
-    // let token = cookie.parse(req.headers.cookie || '').access_token;
-    // if (token) {
-    //   req.session.user = parseToken(token).sub;
-    // } else if (splittedUrlPath[0] !== 'auth') {
-    //   res.status(403).end('UnAuthorized!');
-    // }
+    const token = cookie.parse(req.headers.cookie || '').accessToken;
+    if (token) {
+      req.session.user = parseToken(token).sub;
+    } else if (splittedUrlPath[0] !== 'auth') {
+      res.status(403).end('UnAuthorized!');
+    }
 
     action(req, params)
-      .then((result) => {
+      .then(result => {
         if (result instanceof Function) {
           result(res);
         } else {
           res.json(result);
         }
-      }, (reason) => {
+      }, reason => {
         if (reason && reason.redirect) {
           res.redirect(reason.redirect);
         } else {
@@ -71,14 +69,13 @@ app.use((req, res) => {
   }
 });
 
-//cardJob.start();
 
 const bufferSize = 100;
 const messageBuffer = new Array(bufferSize);
 let messageIndex = 0;
 
 if (config.apiPort) {
-  const runnable = app.listen(config.apiPort, (err) => {
+  const runnable = app.listen(config.apiPort, err => {
     if (err) {
       console.error(err);
     }
@@ -86,11 +83,11 @@ if (config.apiPort) {
     console.info('==> 💻  Send requests to http://%s:%s', config.apiHost, config.apiPort);
   });
 
-  io.on('connection', (socket) => {
-    socket.emit('news', { msg: `'Hello World!' from server` });
+  io.on('connection', socket => {
+    socket.emit('news', { msg: '\'Hello World!\' from server' });
 
     socket.on('history', () => {
-      for (let index = 0; index < bufferSize; index++) {
+      for (let index = 0; index < bufferSize; index += 1) {
         const msgNo = (messageIndex + index) % bufferSize;
         const msg = messageBuffer[msgNo];
         if (msg) {
@@ -99,10 +96,10 @@ if (config.apiPort) {
       }
     });
 
-    socket.on('msg', (data) => {
+    socket.on('msg', data => {
       data.id = messageIndex;
       messageBuffer[messageIndex % bufferSize] = data;
-      messageIndex++;
+      messageIndex += 1;
       io.emit('msg', data);
     });
   });

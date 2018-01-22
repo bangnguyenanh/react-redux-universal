@@ -9,7 +9,7 @@ export function mapUrl(availableActions = {}, url = []) {
   if (url.length === 0 || Object.keys(availableActions).length === 0) {
     return notFound;
   }
-  /*eslint-disable */
+  /* eslint-disable */
   const reducer = (prev, current) => {
     if (prev.action && prev.action[current]) {
       return { action: prev.action[current], params: [] }; // go deeper
@@ -21,7 +21,7 @@ export function mapUrl(availableActions = {}, url = []) {
       }
     }
   };
-  /*eslint-enable */
+  /* eslint-enable */
 
   const actionAndParams = url.reduce(reducer, { action: availableActions, params: [] });
 
@@ -29,8 +29,9 @@ export function mapUrl(availableActions = {}, url = []) {
 }
 
 export function createToken(user) {
-  let payload = {
+  const payload = {
     sub: {
+      id: user._id,
       email: user.email,
       fullName: user.fullName
     },
@@ -45,9 +46,9 @@ export function parseToken(token) {
 }
 
 export function checkNested(obj /*, level1, level2, ... levelN*/) {
-  let args = Array.prototype.slice.call(arguments, 1);
+  const args = Array.prototype.slice.call(arguments, 1);
 
-  for (let i = 0; i < args.length; i++) {
+  for (let i = 0; i < args.length; i += 1) {
     if (!obj || !obj.hasOwnProperty(args[i])) {
       return false;
     }

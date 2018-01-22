@@ -1,9 +1,11 @@
 import { routerActions } from 'react-router-redux';
 import { connectedRouterRedirect } from 'redux-auth-wrapper/history4/redirect';
 import { App, Home, NotFound } from 'containers';
+
 import LoginLoadable from 'containers/Login/Loadable';
 import RegisterLoadable from 'containers/Register/Loadable';
-import SpendLoadable from 'containers/Spend/Loadable';
+import SpendLoadable from 'containers/Spend/Spend';
+import AboutLoadable from 'containers/About/About';
 
 const isAuthenticated = connectedRouterRedirect({
   authenticatedSelector: state => !!state.auth.user,
@@ -27,6 +29,7 @@ const routes = [{
     { path: '/login', component: isNotAuthenticated(LoginLoadable) },
     { path: '/register', component: isNotAuthenticated(RegisterLoadable) },
     { path: '/spend', component: isAuthenticated(SpendLoadable) },
+    { path: '/about', component: AboutLoadable },
     { component: NotFound }
   ],
 }];

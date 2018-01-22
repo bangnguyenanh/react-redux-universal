@@ -27,7 +27,7 @@ export default class AddSpend extends Component {
       },
       {
         value: 'giv',
-        label: 'give'
+        label: 'Give'
       },
       {
         value: 'lts',

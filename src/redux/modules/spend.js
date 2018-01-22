@@ -1,3 +1,6 @@
+const LOAD_LIST = 'redux-example/spend/LOAD_LIST';
+const LOAD_LIST_SUCCESS = 'redux-example/spend/LOAD_LIST_SUCCESS';
+const LOAD_LIST_FAIL = 'redux-example/spend/LOAD_LIST_FAIL';
 const ADD = 'redux-example/spend/ADD';
 const ADD_SUCCESS = 'redux-example/spend/ADD_SUCCESS';
 const ADD_FAIL = 'redux-example/spend/ADD_FAIL';
@@ -23,6 +26,23 @@ export default function reducer(state = initialState, action = {}) {
         adding: false,
         error: action.error
       };
+    case LOAD_LIST:
+      return {
+        ...state,
+        loading: true
+      };
+    case LOAD_LIST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        spends: action.result.spends
+      };
+    case LOAD_LIST_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error
+      };
     default:
       return state;
   }
@@ -33,6 +53,18 @@ export const addSpend = data => ({
   promise: async client => {
     try {
       const result = await client.post('/spend/add', data);
+      return result;
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
+});
+
+export const loadList = data => ({
+  types: [LOAD_LIST, LOAD_LIST_SUCCESS, LOAD_LIST_FAIL],
+  promise: async client => {
+    try {
+      const result = await client.get('/spend/loadList', data);
       return result;
     } catch (error) {
       return Promise.reject(error);

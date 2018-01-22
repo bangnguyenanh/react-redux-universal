@@ -14,3 +14,4 @@ export { default as ServiceBox } from './ServiceBox/ServiceBox';
 export { default as LoggedInHomepage } from './LoggedInHomepage/LoggedInHomepage';
 export { default as SurveyForm } from './SurveyForm/SurveyForm';
 export { default as WidgetForm } from './WidgetForm/WidgetForm';
+export { default as SpendList } from './SpendList/SpendList';

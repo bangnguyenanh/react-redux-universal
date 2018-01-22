@@ -6,18 +6,18 @@ export default function loadByParams(req) {
       reject('Can not access');
     }
 
-    Card.
-      find({
-        createdBy: req.session.user.id
-      }).
-      //limit(10).
-      sort({ createdDate: -1 }).
-      select({ _id: 1, name: 1, description: 1, pageUrl: 1 }).
-      exec(function (err, cards) {
-        if (err) {
-          reject(err.message);
-        }
-
+    Card.find({
+      createdBy: req.session.user.id
+    })
+      .sort({ createdDate: -1 })
+      .select({
+        _id: 1,
+        name: 1,
+        description: 1,
+        pageUrl: 1
+      })
+      .exec((err, cards) => {
+        if (err) reject(err.message);
         resolve(cards);
       });
   });
