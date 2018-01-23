@@ -97,6 +97,10 @@ const catchValidation = error => {
 * Actions
 */
 
+export function isAuthenticated(state) {
+  return state.auth && state.auth.user;
+}
+
 export function isAuthLoaded(state) {
   return state.auth && state.auth.loaded;
 }

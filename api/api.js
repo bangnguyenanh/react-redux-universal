@@ -41,8 +41,6 @@ app.use((req, res) => {
     const token = cookie.parse(req.headers.cookie || '').accessToken;
     if (token) {
       req.session.user = parseToken(token).sub;
-    } else if (splittedUrlPath[0] !== 'auth') {
-      res.status(403).end('UnAuthorized!');
     }
 
     action(req, params)

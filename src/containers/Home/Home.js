@@ -6,13 +6,13 @@ import { asyncConnect } from 'redux-connect';
 import GuestHomepage from 'components/GuestHomepage/GuestHomepage';
 import LoggedInHomepage from 'components/LoggedInHomepage/LoggedInHomepage';
 
-import { isAuthLoaded } from 'redux/modules/auth';
+import { isAuthenticated } from 'redux/modules/auth';
 import { loadList } from 'redux/modules/spend';
 
 @asyncConnect([
   {
     promise: async ({ store: { dispatch, getState } }) => {
-      if (isAuthLoaded(getState())) {
+      if (isAuthenticated(getState())) {
         await dispatch(loadList());
       }
     }

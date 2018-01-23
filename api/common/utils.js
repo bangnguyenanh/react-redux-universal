@@ -2,7 +2,7 @@ import moment from 'moment';
 import jwt from 'jwt-simple';
 import * as config from './config';
 
-export function mapUrl(availableActions = {}, url = []) {
+export const mapUrl = (availableActions = {}, url = []) => {
   const notFound = { action: null, params: [] };
 
   // test for empty input
@@ -26,9 +26,9 @@ export function mapUrl(availableActions = {}, url = []) {
   const actionAndParams = url.reduce(reducer, { action: availableActions, params: [] });
 
   return (typeof actionAndParams.action === 'function') ? actionAndParams : notFound;
-}
+};
 
-export function createToken(user) {
+export const createToken = user => {
   const payload = {
     sub: {
       id: user._id,
@@ -39,13 +39,11 @@ export function createToken(user) {
     exp: moment().add(config.sessionExpiredTime, 'ms').unix()
   };
   return jwt.encode(payload, config.tokenSecret);
-}
+};
 
-export function parseToken(token) {
-  return jwt.decode(token, config.tokenSecret);
-}
+export const parseToken = token => jwt.decode(token, config.tokenSecret);
 
-export function checkNested(obj /*, level1, level2, ... levelN*/) {
+export function checkNested(obj) {
   const args = Array.prototype.slice.call(arguments, 1);
 
   for (let i = 0; i < args.length; i += 1) {
