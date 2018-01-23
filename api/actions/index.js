@@ -1,7 +1,17 @@
-export * as info from './info/index';
-export * as widget from './widget/index';
-export * as survey from './survey/index';
-export * as auth from './auth/index';
-export * as card from './card/index';
-export * as device from './device/index';
-export * as spend from './spend/index';
+import * as info from './info/index';
+import * as widget from './widget/index';
+import * as survey from './survey/index';
+import * as auth from './auth/index';
+import * as card from './card/index';
+import * as device from './device/index';
+import * as spend from './spend/index';
+
+export default {
+  info,
+  widget,
+  survey,
+  auth,
+  card,
+  device,
+  spend
+};

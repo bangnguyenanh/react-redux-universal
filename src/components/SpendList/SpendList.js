@@ -11,7 +11,7 @@ const SpendList = props => {
         <div key={item._id}>
           <h2>{item.amount}</h2>
           <h3>{item.category}</h3>
-          <h3>{item.description}</h3>
+          <span>{item.description}</span>
         </div>
       ))}
     </div>

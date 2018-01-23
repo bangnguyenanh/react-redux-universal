@@ -8,7 +8,7 @@ import SocketIo from 'socket.io';
 import mongoose from 'mongoose';
 import cookie from 'cookie';
 import config from '../src/config';
-import * as actions from './actions/index';
+import actions from './actions';
 import { mapUrl, parseToken } from './common/utils';
 
 const pretty = new PrettyError();
@@ -27,7 +27,7 @@ app.use(session({
   saveUninitialized: false,
   store: new MongoStore({
     url: 'mongodb://localhost/socialapp',
-    touchAfter: 24 * 3600 // time period in seconds
+    touchAfter: 0.5 * 3600 // time period in seconds
   })
 }));
 
@@ -38,8 +38,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use((req, res) => {
+  // Url template: /auth/login
   const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
-
   const { action, params } = mapUrl(actions, splittedUrlPath);
 
   if (action) {

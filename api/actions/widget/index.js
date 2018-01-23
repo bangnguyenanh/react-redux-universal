@@ -1,2 +1,2 @@
-export update from './update';
-export load from './load';
+export { default as update } from './update';
+export { default as load } from './load';
