@@ -4,7 +4,8 @@ export default function add(req) {
   return new Promise((resolve, reject) => {
     const newSpend = new Spend({
       amount: req.body.money,
-      category: req.body.category
+      category: req.body.category,
+      description: req.body.description
     });
 
     newSpend.save((err, spend) => {

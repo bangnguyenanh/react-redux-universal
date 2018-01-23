@@ -19,18 +19,23 @@ const server = new http.Server(app);
 const io = new SocketIo(server);
 io.path('/ws');
 
+const MongoStore = require('connect-mongo')(session);
+
 app.use(session({
   secret: 'react and redux rule!!!!',
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 60000 }
+  store: new MongoStore({
+    url: 'mongodb://localhost/socialapp',
+    touchAfter: 24 * 3600 // time period in seconds
+  })
 }));
-
-app.use(bodyParser.json());
-app.use(cookieParser());
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/socialapp');
+
+app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.use((req, res) => {
   const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);

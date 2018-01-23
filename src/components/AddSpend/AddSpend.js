@@ -44,6 +44,7 @@ export default class AddSpend extends Component {
       <form className="form-horizontal" onSubmit={handleSubmit}>
         <Field name="money" type="text" component={Input} label="Amount of Money" />
         <Field name="category" component={DropdownSelect} label="Category" items={items} />
+        <Field name="description" type="text" component={Input} label="Description" />
         {error && (
           <p className="text-danger">
             <strong>{error}</strong>
