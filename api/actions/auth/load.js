@@ -14,12 +14,12 @@ export default function load(req) {
       if (Math.round(new Date().getTime() / 1000) < payload.exp) {
         User.findOne({ email: payload.sub.email }, (err, user) => {
           if (err) {
-            reject({ message: 'Something went wrong' });
+            reject(new Error('Something went wrong'));
             return;
           }
 
           if (!user) {
-            reject({ message: 'User not found!' });
+            reject(new Error('User not found!'));
             return;
           }
 
@@ -35,7 +35,7 @@ export default function load(req) {
         reject(new Error('Cookie expired!'));
       }
     } else {
-      reject({ loadAuth: true });
+      resolve({ isAnonymous: true });
     }
   });
 }

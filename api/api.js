@@ -37,7 +37,7 @@ mongoose.connect('mongodb://localhost/socialapp');
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use((req, res) => {
+app.use(async (req, res) => {
   // Url template: /auth/login
   const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
   const { action, params } = mapUrl(actions, splittedUrlPath);
@@ -48,30 +48,31 @@ app.use((req, res) => {
       req.session.user = parseToken(token).sub;
     }
 
-    action(req, params)
-      .then(result => {
-        if (result instanceof Function) {
-          result(res);
-        } else {
-          res.json(result);
-        }
-      }, reason => {
-        if (reason && reason.redirect) {
-          res.redirect(reason.redirect);
-        } else {
-          if (reason.loadAuth) {
-            return res.end();
-          }
+    try {
+      const result = await action(req, params);
 
-          console.error('API ERROR:', pretty.render(reason));
-          res.status(reason.status || 500).json(reason);
-        }
-      });
+      if (result.isAnonymous) {
+        // Just check Authorization when we need
+        return res.end();
+      }
+
+      if (result instanceof Function) {
+        result(res);
+      } else {
+        res.json(result);
+      }
+    } catch (error) {
+      if (error.redirect) {
+        return res.redirect(error.redirect);
+      }
+
+      console.error('API ERROR:', pretty.render(error));
+      res.status(error.status || 500).json(error);
+    }
   } else {
     res.status(404).end('NOT FOUND');
   }
 });
-
 
 const bufferSize = 100;
 const messageBuffer = new Array(bufferSize);
@@ -106,6 +107,7 @@ if (config.apiPort) {
       io.emit('msg', data);
     });
   });
+
   io.listen(runnable);
 } else {
   console.error('==>     ERROR: No PORT environment variable has been specified');
