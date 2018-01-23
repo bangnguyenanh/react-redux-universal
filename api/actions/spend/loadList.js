@@ -7,7 +7,7 @@ export default function loadList(req) {
     }
 
     Spend.find({
-      // createdBy: req.session.user.id
+      createdBy: req.session.user.id
     })
       .sort({ createdDate: -1 })
       .exec((err, spends) => {
