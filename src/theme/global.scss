@@ -163,7 +163,7 @@ body {
 
   .widget-title {
     padding: 10px;
-    background-color: #3c763d;
+    background-color: $widget-title;
 
     span {
       font-weight: bold;
@@ -178,25 +178,60 @@ body {
       padding: 0;
 
       li {
-        padding: 10px;
+        border-bottom: 1px solid #DEDEDE;
+
+        &:last-child {
+          border-bottom: none;
+        }
       }
     }
 
     .item {
-      &:nth-child(even){
-        background-color: #DEDEDE;
+      padding: 8px;
+    }
+
+    .item-wrapper {
+      &.vertical-list {
+        .item-name {
+          display: block;
+        }
+        .item-value {
+          display: block;
+        }
+      }
+      &.horizontal-list {
+        .item-value {
+          float: right;
+        }
       }
     }
 
     .item-name {
-      display: block;
       font-weight: bold;
       color: #727272;
     }
 
     .item-value {
-      display: block;
       color: $green-finance;
+    }
+  }
+
+  .transaction-list {
+    .item {
+      .main-info {
+        font-weight: bold;
+
+        .value {
+          float: right;
+        }
+      }
+      .sub-info {
+        font-size: 0.8rem;
+
+        .time {
+          float:  right;
+        }
+      }
     }
   }
 }

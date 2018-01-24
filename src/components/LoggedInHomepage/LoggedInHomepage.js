@@ -14,53 +14,18 @@ export default class LoggedInHomepage extends Component {
 
   render() {
     const styles = require('./LoggedInHomepage.scss');
+    const chartImg = require('./column-chart.png');
     return (
       <section className={styles.loggedInSection}>
         <div className="container">
           <div className="row">
-            <div className="col-md-9">
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="chart widget">
-                    <div className="widget-title">
-                      <span>Chart</span>
-                    </div>
-                    <div className="widget-container">
-                      Chart Here
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="inout widget">
-                    <div className="widget-title">
-                      <span>In Out</span>
-                    </div>
-                    <div className="widget-container">
-                      List Of Item Here
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="chart widget">
-                    <div className="widget-title">
-                      <span>Transactions</span>
-                    </div>
-                    <div className="widget-container">
-                      List Of Transactions Here
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div className="col-md-3">
               <div className="overview widget">
                 <div className="widget-title">
                   <span>Account Overview</span>
                 </div>
                 <div className="widget-container">
-                  <ul>
+                  <ul className="item-wrapper vertical-list">
                     <li className="item">
                       <span className="item-name">Current</span>
                       <span className="item-value">500,000,000</span>
@@ -70,6 +35,128 @@ export default class LoggedInHomepage extends Component {
                       <span className="item-value">800,000,000</span>
                     </li>
                   </ul>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-9">
+              <div className="row">
+                <div className="col-md-8">
+                  <div className="chart widget">
+                    <div className="widget-title">
+                      <span>Chart</span>
+                    </div>
+                    <div className="widget-container">
+                      <img src={chartImg} alt="chart" width="100%" />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="inout widget">
+                    <div className="widget-title">
+                      <span>6 Jars</span>
+                    </div>
+                    <div className="widget-container">
+                      <ul className="item-wrapper horizontal-list">
+                        <li className="item">
+                          <span className="item-name">NEC</span>
+                          <span className="item-value">55%</span>
+                        </li>
+                        <li className="item">
+                          <span className="item-name">EDU</span>
+                          <span className="item-value">10%</span>
+                        </li>
+                        <li className="item">
+                          <span className="item-name">PLY</span>
+                          <span className="item-value">10%</span>
+                        </li>
+                        <li className="item">
+                          <span className="item-name">LTS</span>
+                          <span className="item-value">10%</span>
+                        </li>
+                        <li className="item">
+                          <span className="item-name">FFA</span>
+                          <span className="item-value">10%</span>
+                        </li>
+                        <li className="item">
+                          <span className="item-name">GIV</span>
+                          <span className="item-value">05%</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="chart widget">
+                    <div className="widget-title">
+                      <span>Recent Transactions</span>
+                    </div>
+                    <div className="widget-container">
+                      <ul className="transaction-list">
+                        <li className="item">
+                          <div className="main-info">
+                            <span className="description">ATM Withdrawal Bank</span>
+                            <span className="value">-$40.00</span>
+                          </div>
+                          <div className="sub-info">
+                            <span className="category">Cash & ATM</span>
+                            <span className="time">Jan 24 2018</span>
+                          </div>
+                        </li>
+                        <li className="item">
+                          <div className="main-info">
+                            <span className="description">ATM Withdrawal Bank</span>
+                            <span className="value">-$40.00</span>
+                          </div>
+                          <div className="sub-info">
+                            <span className="category">Cash & ATM</span>
+                            <span className="time">Jan 24 2018</span>
+                          </div>
+                        </li>
+                        <li className="item">
+                          <div className="main-info">
+                            <span className="description">ATM Withdrawal Bank</span>
+                            <span className="value">-$40.00</span>
+                          </div>
+                          <div className="sub-info">
+                            <span className="category">Cash & ATM</span>
+                            <span className="time">Jan 24 2018</span>
+                          </div>
+                        </li>
+                        <li className="item">
+                          <div className="main-info">
+                            <span className="description">ATM Withdrawal Bank</span>
+                            <span className="value">-$40.00</span>
+                          </div>
+                          <div className="sub-info">
+                            <span className="category">Cash & ATM</span>
+                            <span className="time">Jan 24 2018</span>
+                          </div>
+                        </li>
+                        <li className="item">
+                          <div className="main-info">
+                            <span className="description">ATM Withdrawal Bank</span>
+                            <span className="value">-$40.00</span>
+                          </div>
+                          <div className="sub-info">
+                            <span className="category">Cash & ATM</span>
+                            <span className="time">Jan 24 2018</span>
+                          </div>
+                        </li>
+                        <li className="item">
+                          <div className="main-info">
+                            <span className="description">ATM Withdrawal Bank</span>
+                            <span className="value">-$40.00</span>
+                          </div>
+                          <div className="sub-info">
+                            <span className="category">Cash & ATM</span>
+                            <span className="time">Jan 24 2018</span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

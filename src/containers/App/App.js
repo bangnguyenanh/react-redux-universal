@@ -86,7 +86,7 @@ export default class App extends Component {
         <Navbar fixedTop>
           <Navbar.Header>
             <Navbar.Brand>
-              <IndexLinkContainer to="/" activeStyle={{ color: '#33e0ff' }} className={styles.title}>
+              <IndexLinkContainer to="/" activeStyle={{ color: '#3f51b5' }} className={styles.title}>
                 <div className={styles.brand}>
                   <span className={styles.siteName}>{config.app.title}</span>
                 </div>
