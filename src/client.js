@@ -6,7 +6,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
-import Loadable from 'react-loadable';
 import localForage from 'localforage';
 import { ReduxAsyncConnect } from 'redux-connect';
 import { AppContainer as HotEnabler } from 'react-hot-loader';
@@ -53,8 +52,6 @@ global.socket = initSocket();
       , dest
     );
   };
-
-  await Loadable.preloadReady();
 
   hydrate(routes);
 

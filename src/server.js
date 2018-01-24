@@ -86,7 +86,7 @@ app.use(async (req, res) => {
   const url = req.originalUrl || req.url;
   const location = parseUrl(url);
   const client = apiClient(req);
-  const history = createMemoryHistory({ initialEntries: [req.originalUrl] });
+  const history = createMemoryHistory({ initialEntries: [url] });
   const store = createStore(history, client);
 
   const hydrate = () => {
@@ -104,7 +104,6 @@ app.use(async (req, res) => {
     });
 
     const context = {};
-    const modules = [];
 
     const component = (
       <Provider store={store} key="provider">

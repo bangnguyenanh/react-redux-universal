@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import MiniInfoBar from 'components/MiniInfoBar/MiniInfoBar';
-import { asyncConnect } from 'redux-connect';
 
-@asyncConnect([
-  {
-    promise: () => {
-      console.log('Hello');
-    }
-  }
-])
 export default class About extends Component {
   state = {
     showKitten: false

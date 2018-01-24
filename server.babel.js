@@ -1,10 +1,9 @@
 //  enable runtime transpilation to use ES6/7 in node
+const fs = require('fs');
 
-var fs = require('fs');
+const babelrc = fs.readFileSync('./.babelrc');
 
-var babelrc = fs.readFileSync('./.babelrc');
-var config;
-
+let config;
 try {
   config = JSON.parse(babelrc);
   if (Array.isArray(config.plugins)) {

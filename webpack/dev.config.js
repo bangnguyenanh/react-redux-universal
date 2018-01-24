@@ -9,8 +9,6 @@ var assetsPath = path.resolve(__dirname, '../static/dist');
 var host = (process.env.HOST || 'localhost');
 var port = (+process.env.PORT + 1) || 3001;
 
-var ReactLoadablePlugin = require('react-loadable/webpack').ReactLoadablePlugin;
-
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
 
@@ -152,10 +150,6 @@ var webpackConfig = module.exports = {
       __DEVTOOLS__: true
     }),
 
-    webpackIsomorphicToolsPlugin.development(),
-    
-    new ReactLoadablePlugin({
-      filename: path.join(assetsPath, 'loadable-chunks.json')
-    })
+    webpackIsomorphicToolsPlugin.development()
   ]
 };
