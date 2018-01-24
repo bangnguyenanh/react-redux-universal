@@ -104,6 +104,7 @@ app.use(async (req, res) => {
     });
 
     const context = {};
+    const modules = [];
 
     const component = (
       <Provider store={store} key="provider">
@@ -113,12 +114,15 @@ app.use(async (req, res) => {
       </Provider>
     );
 
-    // TODO: Implement redirect
-    // if (context.url) {
-    //   return res.redirect(302, context.url);
-    // }
+    const content = ReactDOM.renderToString(component);
 
-    const html = <Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />;
+    console.log(content);
+
+    if (context.url) {
+      return res.redirect(302, context.url);
+    }
+
+    const html = <Html assets={webpackIsomorphicTools.assets()} content={content} store={store} />;
 
     res.status(200).send(`<!doctype html>${ReactDOM.renderToString(html)}`);
   } catch (error) {

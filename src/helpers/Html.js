@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom/server';
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
 
@@ -14,8 +13,7 @@ import Helmet from 'react-helmet';
  * by the server.js file.
  */
 const Html = props => {
-  const { assets, component, store } = props;
-  const content = component ? ReactDOM.renderToString(component) : '';
+  const { assets, content, store } = props;
   const head = Helmet.renderStatic();
 
   /* eslint-disable react/no-danger */
@@ -80,14 +78,15 @@ Html.propTypes = {
     styles: PropTypes.object,
     javascript: PropTypes.object
   }),
-  component: PropTypes.node.isRequired,
+  content: PropTypes.string,
   store: PropTypes.shape({
     getState: PropTypes.func
   }).isRequired
 };
 
 Html.defaultProps = {
-  assets: {}
+  assets: {},
+  content: ''
 };
 
 export default Html;
