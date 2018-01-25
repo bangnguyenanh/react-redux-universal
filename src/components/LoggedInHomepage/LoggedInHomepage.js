@@ -1,35 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-const TransactionList = props => {
-  const { trans } = props;
-
-  return (
-    <ul className="transaction-list">
-      {trans && trans.map(tran => (
-        <li className="item" key={tran.id}>
-          <div className="main-info">
-            <span className="description">{tran.description}</span>
-            <span className="value">{tran.amount}</span>
-          </div>
-          <div className="sub-info">
-            <span className="category">{tran.category}</span>
-            <span className="time">{tran.time}</span>
-          </div>
-        </li>
-      ))}
-    </ul>
-  );
-};
-
-TransactionList.propTypes = {
-  trans: PropTypes.arrayOf(PropTypes.shape({
-    description: PropTypes.string,
-    value: PropTypes.string,
-    category: PropTypes.string,
-    time: PropTypes.string
-  })).isRequired
-};
+import TransactionList from 'components/TransactionList/TransactionList';
 
 export default class LoggedInHomepage extends Component {
   static contextTypes = {
@@ -42,21 +13,6 @@ export default class LoggedInHomepage extends Component {
   };
 
   render() {
-    const trans = [{
-      id: 1,
-      description: 'ATM Withdrawal Bank',
-      amount: '- $40.00',
-      category: 'Bank & Cash',
-      time: 'Jan 25 2018'
-    },
-    {
-      id: 2,
-      description: 'Buy Coffee',
-      amount: '- $2',
-      category: 'Food',
-      time: 'Jan 24 2018'
-    }];
-
     const styles = require('./LoggedInHomepage.scss');
     const chartImg = require('./column-chart.png');
     return (
@@ -137,7 +93,7 @@ export default class LoggedInHomepage extends Component {
                       <span>Recent Transactions</span>
                     </div>
                     <div className="widget-container">
-                      <TransactionList trans={trans} />
+                      <TransactionList />
                     </div>
                   </div>
                 </div>
