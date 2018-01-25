@@ -10,7 +10,7 @@ const DropdownSelect = ({
       {label}
     </label>
     <div className="col-sm-9">
-      <select {...input}>
+      <select {...input} className="form-control">
         <option value="">Select</option>
         {items.map(item => (
           <option key={item.value} value={item.value}>{item.label}</option>

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { reduxForm, Field, propTypes } from 'redux-form';
+
 import Input from 'formElements/Input/Input';
 import DropdownSelect from 'formElements/DropdownSelect/DropdownSelect';
+import Textarea from 'formElements/Textarea/Textarea';
+import Datepicker from 'formElements/Datepicker/Datepicker';
 
 @reduxForm({
   form: 'AddSpend'
@@ -42,9 +45,10 @@ export default class AddSpend extends Component {
     const { handleSubmit, error } = this.props;
     return (
       <form className="form-horizontal" onSubmit={handleSubmit}>
-        <Field name="money" type="text" component={Input} label="Amount of Money" />
+        <Field name="description" component={Textarea} label="Description" />
+        <Field name="amount" type="text" component={Input} label="Amount of Money" />
         <Field name="category" component={DropdownSelect} label="Category" items={items} />
-        <Field name="description" type="text" component={Input} label="Description" />
+        <Field name="time" component={Datepicker} label="Time" value="05/15/2018" />
         {error && (
           <p className="text-danger">
             <strong>{error}</strong>

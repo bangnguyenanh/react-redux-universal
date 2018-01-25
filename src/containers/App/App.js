@@ -111,6 +111,9 @@ export default class App extends Component {
               <LinkContainer to="/about">
                 <NavItem>About Us</NavItem>
               </LinkContainer>
+              <LinkContainer to="/spend">
+                <NavItem>Add Spend</NavItem>
+              </LinkContainer>
             </Nav>
 
             {!user && (
@@ -127,11 +130,10 @@ export default class App extends Component {
             {user && (
               <Nav navbar pullRight>
                 <NavDropdown eventKey={3} title={user.fullName} id="basic-nav-dropdown">
-                  <MenuItem eventKey={3.1}>Action</MenuItem>
-                  <MenuItem eventKey={3.2}>Another action</MenuItem>
-                  <MenuItem eventKey={3.3}>Something else here</MenuItem>
+                  <MenuItem eventKey={3.1}>Profile</MenuItem>
+                  <MenuItem eventKey={3.2}>Settings</MenuItem>
                   <MenuItem divider />
-                  <MenuItem eventKey={3.4} onClick={this.handleLogout}>Logout</MenuItem>
+                  <MenuItem eventKey={3.3} onClick={this.handleLogout}>Log out</MenuItem>
                 </NavDropdown>
               </Nav>
             )}
