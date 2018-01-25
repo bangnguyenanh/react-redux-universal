@@ -13,7 +13,7 @@ const DropdownSelect = ({
       <select {...input} className="form-control">
         <option value="">Select</option>
         {items.map(item => (
-          <option key={item.value} value={item.value}>{item.label}</option>
+          <option key={item.key} value={item.key}>{item.label}</option>
         ))}
       </select>
       {error && touched && <span className="glyphicon glyphicon-remove form-control-feedback" />}
@@ -29,7 +29,7 @@ const DropdownSelect = ({
 DropdownSelect.propTypes = {
   ...fieldPropTypes,
   items: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.string,
+    key: PropTypes.string,
     label: PropTypes.string
   })).isRequired
 };

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import moment from 'moment';
+import categoryDict from 'utils/categoryDict';
 
 @connect(state => ({
   trans: state.spend.spends
@@ -27,8 +29,8 @@ export default class TransactionList extends Component {
               <span className="value">{tran.amount}</span>
             </div>
             <div className="sub-info">
-              <span className="category">{tran.category}</span>
-              <span className="time">{tran.time}</span>
+              <span className="category">{categoryDict.find(cat => cat.key === tran.category).label}</span>
+              <span className="time">{moment(tran.createdDate).format('LLL')}</span>
             </div>
           </li>
         ))}

@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
 const handleChange = input => date => {
-  input.onChange(moment(date).format('YYYY-MM-DD'));
+  input.onChange(moment(date).format('LLL'));
 };
 
 const Datepicker = ({
@@ -17,10 +17,12 @@ const Datepicker = ({
     <div className="col-sm-9">
       <DatePicker
         {...input}
+        showTimeSelect
         placeholder={placeholder}
-        dateForm="YYYY-MM-DD"
+        dateFormat="LLL"
+        timeFormat="HH:mm"
         className="form-control"
-        selected={input.value ? moment(input.value, 'YYYY-MM-DD') : null}
+        selected={input.value ? moment(input.value, 'LLL') : null}
         onChange={handleChange(input)}
       />
       {error && touched && <span className="glyphicon glyphicon-remove form-control-feedback" />}

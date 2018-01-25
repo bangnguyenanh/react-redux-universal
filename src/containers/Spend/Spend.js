@@ -4,16 +4,6 @@ import AddSpend from 'components/AddSpend/AddSpend';
 import { connect } from 'react-redux';
 import * as spendActions from 'redux/modules/spend';
 
-import { asyncConnect } from 'redux-connect';
-
-@asyncConnect([
-  {
-    promise: () => {
-      console.log('Hello');
-    }
-  }
-])
-
 @connect(() => ({}), { ...spendActions })
 export default class Spend extends Component {
   static propTypes = {

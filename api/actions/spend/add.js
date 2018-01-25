@@ -11,7 +11,7 @@ export default function add(req) {
       category: req.body.category,
       description: req.body.description,
       createdBy: req.session.user.id,
-      createdDate: req.session.time
+      createdDate: new Date(req.body.time)
     });
 
     newSpend.save((err, spend) => {
