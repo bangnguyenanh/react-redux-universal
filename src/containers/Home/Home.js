@@ -13,7 +13,7 @@ import { loadList } from 'redux/modules/spend';
   {
     promise: async ({ store: { dispatch, getState } }) => {
       if (isAuthenticated(getState())) {
-        await dispatch(loadList());
+        await dispatch(loadList({ pageIndex: 0, pageSize: 5 }));
       }
     }
   }

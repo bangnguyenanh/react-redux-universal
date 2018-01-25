@@ -64,7 +64,7 @@ export const loadList = data => ({
   types: [LOAD_LIST, LOAD_LIST_SUCCESS, LOAD_LIST_FAIL],
   promise: async client => {
     try {
-      const result = await client.get('/spend/loadList', data);
+      const result = await client.get('/spend/loadList', { params: data });
       return result;
     } catch (error) {
       return Promise.reject(error);
