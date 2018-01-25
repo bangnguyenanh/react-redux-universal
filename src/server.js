@@ -107,7 +107,7 @@ app.use(async (req, res) => {
 
     const component = (
       <Provider store={store} key="provider">
-        <StaticRouter location={req.url} context={context}>
+        <StaticRouter location={url} context={context}>
           <ReduxAsyncConnect routes={routes} helpers={{ client }} />
         </StaticRouter>
       </Provider>

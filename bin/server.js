@@ -2,6 +2,7 @@
 require('../server.babel'); // babel registration (runtime transpilation for node)
 
 const path = require('path');
+
 const rootDir = path.resolve(__dirname, '..');
 const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 const isomorphicConfig = require('../webpack/webpack-isomorphic-tools');
