@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import MiniInfoBar from 'components/MiniInfoBar/MiniInfoBar';
 
 export default class About extends Component {
   state = {
@@ -39,8 +38,6 @@ export default class About extends Component {
           Hey! You found the mini info bar! The following component is display-only. Note that it shows the same time as
           the info bar.
         </p>
-
-        <MiniInfoBar />
 
         <h3>Images</h3>
 

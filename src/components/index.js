@@ -2,9 +2,7 @@
 * Don't import directly { ... } from components, just use for unit tests.
 */
 
-export { default as CounterButton } from './CounterButton/CounterButton';
 export { default as FacebookLogin } from './FacebookLogin/FacebookLogin';
-export { default as GithubButton } from './GithubButton/GithubButton';
 export { default as InfoBar } from './InfoBar/InfoBar';
 export { default as LoginForm } from './LoginForm/LoginForm';
 export { default as RegisterForm } from './RegisterForm/RegisterForm';
