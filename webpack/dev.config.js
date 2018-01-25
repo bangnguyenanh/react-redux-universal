@@ -57,7 +57,7 @@ var webpackConfig = module.exports = {
         use: [
           { loader: 'react-hot-loader/webpack' },
           { loader: 'babel-loader', options: babelLoaderQuery },
-          //{ loader: 'eslint-loader', options: { emitWarning: true } }
+          { loader: 'eslint-loader', options: { emitWarning: true } }
         ],
         include: [path.resolve(__dirname, '../src')]
       }, {

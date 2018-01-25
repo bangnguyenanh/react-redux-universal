@@ -26,10 +26,10 @@ const GuestHomepage = () => {
               <p className="text-faded mb-5">
                 Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download
                     your template and start going, no strings attached!
-                </p>
+              </p>
               <a className="btn btn-primary btn-xl js-scroll-trigger" href="#about">
                 Find Out More
-                </a>
+              </a>
             </div>
           </div>
         </div>
@@ -43,12 +43,12 @@ const GuestHomepage = () => {
               <hr className="light my-4" />
               <p className="text-faded mb-4">
                 Start Bootstrap has everything you need to get your new website up and running in no time! All of the
-                    templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings
-                    attached!
-                </p>
+                    templates and themes on Start Bootstrap are open source, free to download, and easy to use.
+                    No strings attached!
+              </p>
               <a className="btn btn-light btn-xl js-scroll-trigger" href="#services">
                 Get Started!
-                </a>
+              </a>
             </div>
           </div>
         </div>
@@ -143,7 +143,7 @@ const GuestHomepage = () => {
               <p className="mb-5">
                 Ready to start your next project with us? That's great! Give us a call or send us an email and we will
                     get back to you as soon as possible!
-                </p>
+              </p>
             </div>
           </div>
           <div className="row">

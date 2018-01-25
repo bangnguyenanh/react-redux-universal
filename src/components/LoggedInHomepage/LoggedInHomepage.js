@@ -90,7 +90,7 @@ export default class LoggedInHomepage extends Component {
                 <div className="col-md-12">
                   <div className="chart widget">
                     <div className="widget-title">
-                      <span>Recent Transactions</span>
+                      <span>Recent Transactions 1</span>
                     </div>
                     <div className="widget-container">
                       <TransactionList />
