@@ -1,11 +1,14 @@
 import { routerActions } from 'react-router-redux';
 import { connectedRouterRedirect } from 'redux-auth-wrapper/history4/redirect';
+import locationHelperBuilder from 'redux-auth-wrapper/history4/locationHelper';
 import { App, Home, NotFound } from 'containers';
 
 import Login from 'containers/Login/Login';
 import Register from 'containers/Register/Register';
 import Spend from 'containers/Spend/Spend';
 import About from 'containers/About/About';
+
+const locationHelper = locationHelperBuilder({});
 
 const isAuthenticated = connectedRouterRedirect({
   authenticatedSelector: state => !!state.auth.user,
@@ -17,7 +20,7 @@ const isAuthenticated = connectedRouterRedirect({
 const isNotAuthenticated = connectedRouterRedirect({
   authenticatedSelector: state => !state.auth.user,
   redirectAction: routerActions.replace,
-  redirectPath: '/',
+  redirectPath: (state, ownProps) => locationHelper.getRedirectQueryParam(ownProps) || '/',
   allowRedirectBack: false,
   wrapperDisplayName: 'UserIsNotAuthenticated'
 });

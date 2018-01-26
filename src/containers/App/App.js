@@ -63,13 +63,13 @@ export default class App extends Component {
     })
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.user && nextProps.user) {
-      this.context.router.history.push('/loginSuccess');
-    } else if (this.props.user && !nextProps.user) {
-      this.context.router.history.push('/');
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   if (!this.props.user && nextProps.user) {
+  //     this.context.router.history.push('/loginSuccess');
+  //   } else if (this.props.user && !nextProps.user) {
+  //     this.context.router.history.push('/');
+  //   }
+  // }
 
   handleLogout = event => {
     event.preventDefault();
