@@ -23,7 +23,7 @@ export default class AddSpend extends Component {
         <Field name="description" component={Textarea} label="Description" />
         <Field name="amount" type="text" component={Input} label="Amount of Money" />
         <Field name="category" component={DropdownSelect} label="Category" items={categoryDict} />
-        <Field name="time" component={Datepicker} label="Time" value="05/15/2018" />
+        <Field name="time" component={Datepicker} label="Time" placeholder="Select time" />
         {error && (
           <p className="text-danger">
             <strong>{error}</strong>
