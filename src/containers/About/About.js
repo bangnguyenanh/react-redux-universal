@@ -39,7 +39,7 @@ export default class About extends Component {
           the info bar.
         </p>
 
-        <h3>Images</h3>
+        <h3>Images 1</h3>
 
         <p>
           Psst! Would you like to see a kitten?

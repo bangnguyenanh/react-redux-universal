@@ -51,10 +51,10 @@ app.use(async (req, res) => {
     try {
       const result = await action(req, params);
 
-      if (result.isAnonymous) {
-        // Just check Authorization when we need
-        return res.end();
-      }
+      // if (result.isAnonymous) {
+      //   // Just check Authorization when we need
+      //   return res.end();
+      // }
 
       if (result instanceof Function) {
         result(res);

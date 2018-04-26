@@ -5,6 +5,7 @@ import * as auth from './auth/index';
 import * as card from './card/index';
 import * as device from './device/index';
 import * as spend from './spend/index';
+import * as category from './category/index';
 
 export default {
   info,
@@ -13,5 +14,6 @@ export default {
   auth,
   card,
   device,
-  spend
+  spend,
+  category,
 };
