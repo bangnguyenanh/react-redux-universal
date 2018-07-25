@@ -1,4 +1,6 @@
-import { createStore as _createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import {
+  createStore as _createStore, applyMiddleware, compose, combineReducers
+} from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import { createPersistor } from 'redux-persist';
 import createMiddleware from './middleware/clientMiddleware';

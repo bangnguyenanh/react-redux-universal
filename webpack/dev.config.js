@@ -31,6 +31,7 @@ var babelLoaderQuery = Object.assign({}, babelrcObject, babelrcObjectDevelopment
 delete babelLoaderQuery.env;
 
 var webpackConfig = module.exports = {
+  mode: 'development',
   devtool: 'inline-source-map',
   context: path.resolve(__dirname, '..'),
   entry: {
@@ -55,9 +56,8 @@ var webpackConfig = module.exports = {
       {
         test: /\.jsx?$/,
         use: [
-          { loader: 'react-hot-loader/webpack' },
-          { loader: 'babel-loader', options: babelLoaderQuery },
-          { loader: 'eslint-loader', options: { emitWarning: true } }
+          { loader: 'babel-loader', options: babelLoaderQuery, },
+          //{ loader: 'eslint-loader', options: { emitWarning: true } }
         ],
         include: [path.resolve(__dirname, '../src')]
       }, {
@@ -120,7 +120,7 @@ var webpackConfig = module.exports = {
       'src',
       'node_modules'
     ],
-    extensions: ['.json', '.js', '.jsx']
+    extensions: ['.json', '.js', '.jsx'],
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({

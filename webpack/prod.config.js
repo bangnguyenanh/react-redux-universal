@@ -17,6 +17,7 @@ var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  mode: 'production',
   devtool: 'source-map',
   context: path.resolve(__dirname, '..'),
   entry: {
@@ -134,6 +135,9 @@ module.exports = {
     ],
     extensions: ['.json', '.js', '.jsx']
   },
+  optimization: {
+    minimize: true,
+  },
   plugins: [
     new webpack.LoaderOptionsPlugin({
       test: /\.(less|scss)/,
@@ -169,13 +173,6 @@ module.exports = {
 
     // ignore dev config
     new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
-
-    // optimizations
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
 
     webpackIsomorphicToolsPlugin,
 
