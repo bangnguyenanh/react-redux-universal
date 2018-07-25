@@ -9,7 +9,7 @@ import VError from 'verror';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import httpProxy from 'http-proxy';
-import apiClient from 'helpers/apiClient';
+import apiClient from 'helpers/ApiClient';
 
 import { StaticRouter } from 'react-router';
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect';
