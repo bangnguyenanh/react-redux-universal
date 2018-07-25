@@ -4,7 +4,6 @@ yarn.lock
 package-lock.json
 *.iml
 webpack-assets.json
-webpack-stats.json
 npm-debug.log
 webpack/dlls/*.json
 api/**/*.nedb
