@@ -229,6 +229,6 @@
     "webpack-dev-middleware": "^3.1.2",
     "webpack-dev-server": "^3.1.4",
     "webpack-hot-middleware": "^2.22.2",
-    "webpack-isomorphic-tools": "file:../webpack-isomorphic-tools"
+    "webpack-isomorphic-tools": "^3.0.6"
   }
 }
