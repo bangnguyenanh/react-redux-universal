@@ -30,7 +30,7 @@
     "start-dev-api": "bnr start-dev-api",
     "watch-client": "bnr watch-client",
     "build": "bnr build",
-    "postinstall": "concurrently \"npm run build\"",
+    "__postinstall__": "concurrently \"npm run build\"",
     "prettier": "prettier-eslint --write --eslint-config-path .eslintrc './+(src|api)/**/*.js'",
     "lint": "eslint -c .eslintrc api src",
     "test": "bnr test",

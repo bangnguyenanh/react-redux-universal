@@ -12,7 +12,7 @@ module.exports = {
       ref: 'origin/master',
       repo: 'git@github.com:bangnguyenanh/react-redux-universal.git',
       path: '/home/lemonrhum/kevinnguyen.xyz',
-      'post-deploy': 'yarn && yarn run build && pm2 reload ecosystem.config.js --env production'
+      'post-deploy': 'yarn && pm2 reload ecosystem.config.js --env production'
     }
   }
 };
